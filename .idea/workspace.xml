@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="window icon ready">
-      <change afterPath="$PROJECT_DIR$/src/main/java/app/Colors.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/misc/Misc.java" afterDir="false" />
+    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="add setColor()">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Application.java" afterDir="false" />
     </list>
@@ -71,7 +69,7 @@
       <updated>1677911932411</updated>
       <workItem from="1677911933820" duration="4084000" />
       <workItem from="1677960011615" duration="5244000" />
-      <workItem from="1678023477086" duration="1458000" />
+      <workItem from="1678023477086" duration="2187000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1677913399113</created>
@@ -129,7 +127,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677962310791</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="add setColor()">
+      <created>1678025025629</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1678025025629</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,6 +160,7 @@
     <MESSAGE value="events consumer works" />
     <MESSAGE value="window title ready" />
     <MESSAGE value="window icon ready" />
-    <option name="LAST_COMMIT_MESSAGE" value="window icon ready" />
+    <MESSAGE value="add setColor()" />
+    <option name="LAST_COMMIT_MESSAGE" value="add setColor()" />
   </component>
 </project>
