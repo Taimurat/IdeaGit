@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="window title ready">
+    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="window icon ready">
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/Colors.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/misc/Misc.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Application.java" afterDir="false" />
     </list>
@@ -40,6 +42,11 @@
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="app" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -63,7 +70,8 @@
       <option name="presentableId" value="Default" />
       <updated>1677911932411</updated>
       <workItem from="1677911933820" duration="4084000" />
-      <workItem from="1677960011615" duration="2024000" />
+      <workItem from="1677960011615" duration="5244000" />
+      <workItem from="1678023477086" duration="1458000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1677913399113</created>
@@ -114,7 +122,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677961166284</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="window icon ready">
+      <created>1677962310791</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1677962310791</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,6 +154,7 @@
     <MESSAGE value="classes" />
     <MESSAGE value="events consumer works" />
     <MESSAGE value="window title ready" />
-    <option name="LAST_COMMIT_MESSAGE" value="window title ready" />
+    <MESSAGE value="window icon ready" />
+    <option name="LAST_COMMIT_MESSAGE" value="window icon ready" />
   </component>
 </project>
