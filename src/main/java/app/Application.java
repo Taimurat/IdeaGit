@@ -48,6 +48,10 @@ public class Application implements Consumer<Event> {
      */
     private final PanelLog panelLog;
     /**
+     * Представление проблемы
+     */
+    public static Task task;
+    /**
      * Конструктор окна приложения
      */
     public Application() {
