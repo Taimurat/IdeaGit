@@ -74,6 +74,14 @@ public class InputFactory {
     public static boolean cursorDraw() {
         return cursorDraw;
     }
+    /**
+     * Снять фокус со всех полей ввода
+     */
+    public static void defocusAll() {
+        // снимаем фокусы
+        for (Input input : inputs)
+            input.focused = false;
+    }
 
     /**
      * Запрещаем вызов конструктора
