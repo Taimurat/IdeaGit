@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="inputs work">
+    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="input tab works">
+      <change afterPath="$PROJECT_DIR$/src/main/java/controls/Button.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controls/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controls/Input.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controls/InputFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controls/InputFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Colors.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelControl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -77,7 +77,8 @@
       <workItem from="1678023477086" duration="10213000" />
       <workItem from="1678439798823" duration="2423000" />
       <workItem from="1679044794199" duration="2669000" />
-      <workItem from="1679121881697" duration="3119000" />
+      <workItem from="1679121881697" duration="5093000" />
+      <workItem from="1680859503413" duration="1330000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1677913399113</created>
@@ -233,7 +234,21 @@
       <option name="project" value="LOCAL" />
       <updated>1679124368942</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="input select works">
+      <created>1679125014841</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1679125014841</updated>
+    </task>
+    <task id="LOCAL-00024" summary="input tab works">
+      <created>1679125235547</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1679125235547</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,6 +288,8 @@
     <MESSAGE value="adding points works" />
     <MESSAGE value="multiline label" />
     <MESSAGE value="inputs work" />
-    <option name="LAST_COMMIT_MESSAGE" value="inputs work" />
+    <MESSAGE value="input select works" />
+    <MESSAGE value="input tab works" />
+    <option name="LAST_COMMIT_MESSAGE" value="input tab works" />
   </component>
 </project>
