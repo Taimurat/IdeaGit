@@ -9,6 +9,7 @@ import misc.CoordinateSystem2i;
 import misc.Vector2d;
 import misc.Vector2i;
 import panels.PanelLog;
+import panels.PanelRendering;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
@@ -25,6 +26,7 @@ public class Task {
             Заданы два множества точек в вещественном
             пространстве. Требуется построить пересечение
             и разность этих множеств""";
+
 
     /**
      * Вещественная система координат задачи
@@ -135,5 +137,25 @@ public class Task {
                 addPoint(pos, Point.PointSet.SECOND_SET);
         }
     }
+
+    /**
+     * Очистить задачу
+     */
+    public void clear() {
+        points.clear();
+    }
+    /**
+     * Решить задачу
+     */
+    public void solve() {
+        PanelLog.warning("Вызван метод solve()\n Пока что решения нет");
+    }
+    /**
+     * Отмена решения задачи
+     */
+    public void cancel() {
+
+    }
+
 
 }

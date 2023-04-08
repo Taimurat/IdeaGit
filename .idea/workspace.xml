@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="buttons work">
+    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="random points">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Task.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelRendering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelRendering.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +77,8 @@
       <workItem from="1678439798823" duration="2423000" />
       <workItem from="1679044794199" duration="2669000" />
       <workItem from="1679121881697" duration="5093000" />
-      <workItem from="1680859503413" duration="1641000" />
+      <workItem from="1680859503413" duration="1839000" />
+      <workItem from="1680935451908" duration="671000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1677913399113</created>
@@ -254,7 +255,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680861003443</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="random points">
+      <created>1680861291984</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1680861291984</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,7 +280,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Initial commit" />
     <MESSAGE value="gitignore changed" />
     <MESSAGE value="readme added" />
     <MESSAGE value="skija connected" />
@@ -297,6 +304,7 @@
     <MESSAGE value="input select works" />
     <MESSAGE value="input tab works" />
     <MESSAGE value="buttons work" />
-    <option name="LAST_COMMIT_MESSAGE" value="buttons work" />
+    <MESSAGE value="random points" />
+    <option name="LAST_COMMIT_MESSAGE" value="random points" />
   </component>
 </project>
