@@ -24,6 +24,10 @@ import java.util.concurrent.ThreadLocalRandom;
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, property = "@class")
 public class Task {
     /**
+     * Флаг, решена ли задача
+     */
+    private boolean solved;
+    /**
      * Текст задачи
      */
     public static final String TASK_TEXT = """
@@ -115,6 +119,7 @@ public class Task {
      * @param pointSet множество
      */
     public void addPoint(Vector2d pos, Point.PointSet pointSet) {
+        solved = false;
         Point newPoint = new Point(pos, pointSet);
         points.add(newPoint);
         // Добавляем в лог запись информации
@@ -154,18 +159,28 @@ public class Task {
      */
     public void clear() {
         points.clear();
+        solved = false;
     }
     /**
      * Решить задачу
      */
     public void solve() {
+        solved = true;
         PanelLog.warning("Вызван метод solve()\n Пока что решения нет");
     }
     /**
      * Отмена решения задачи
      */
     public void cancel() {
-
+        solved = false;
+    }
+    /**
+     * проверка, решена ли задача
+     *
+     * @return флаг
+     */
+    public boolean isSolved() {
+        return solved;
     }
 
 

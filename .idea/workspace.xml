@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="control beginning">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/conf.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Point.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/misc/CoordinateSystem2i.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/misc/CoordinateSystem2i.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelRendering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelRendering.java" afterDir="false" />
-    </list>
+    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="json works" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -81,7 +74,7 @@
       <workItem from="1679044794199" duration="2669000" />
       <workItem from="1679121881697" duration="5093000" />
       <workItem from="1680859503413" duration="1839000" />
-      <workItem from="1680935451908" duration="4483000" />
+      <workItem from="1680935451908" duration="4784000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1677913399113</created>
@@ -272,7 +265,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680936419107</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="json works">
+      <created>1680940176617</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1680940176617</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -290,7 +290,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="readme added" />
     <MESSAGE value="skija connected" />
     <MESSAGE value="classes" />
     <MESSAGE value="events consumer works" />
@@ -315,6 +314,7 @@
     <MESSAGE value="buttons work" />
     <MESSAGE value="random points" />
     <MESSAGE value="control beginning" />
-    <option name="LAST_COMMIT_MESSAGE" value="control beginning" />
+    <MESSAGE value="json works" />
+    <option name="LAST_COMMIT_MESSAGE" value="json works" />
   </component>
 </project>
