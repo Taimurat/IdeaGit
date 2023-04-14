@@ -1,6 +1,9 @@
 package app;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 import misc.Misc;
 import misc.Vector2d;
 
@@ -27,6 +30,7 @@ public class Point {
     /**
      * Множество, которому принадлежит точка
      */
+    @Getter
     protected final PointSet pointSet;
     /**
      * Координаты точки
@@ -39,7 +43,8 @@ public class Point {
      * @param pos     положение точки
      * @param setType множество, которому она принадлежит
      */
-    public Point(Vector2d pos, PointSet setType) {
+    @JsonCreator
+    public Point(@JsonProperty("pos") Vector2d pos, @JsonProperty("setType") PointSet setType) {
         this.pos = pos;
         this.pointSet = setType;
     }
@@ -73,6 +78,7 @@ public class Point {
      *
      * @return множество
      */
+    @JsonIgnore
     public PointSet getSetType() {
         return pointSet;
     }

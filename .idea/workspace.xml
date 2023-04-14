@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="json works" />
+    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="solve button">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Colors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/misc/CoordinateSystem2d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/misc/CoordinateSystem2d.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/conf.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -74,7 +82,8 @@
       <workItem from="1679044794199" duration="2669000" />
       <workItem from="1679121881697" duration="5093000" />
       <workItem from="1680859503413" duration="1839000" />
-      <workItem from="1680935451908" duration="4784000" />
+      <workItem from="1680935451908" duration="5137000" />
+      <workItem from="1681464375597" duration="1242000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1677913399113</created>
@@ -272,7 +281,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680940176617</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="solve button">
+      <created>1680940589413</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1680940589413</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -290,7 +306,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="skija connected" />
     <MESSAGE value="classes" />
     <MESSAGE value="events consumer works" />
     <MESSAGE value="window title ready" />
@@ -315,6 +330,7 @@
     <MESSAGE value="random points" />
     <MESSAGE value="control beginning" />
     <MESSAGE value="json works" />
-    <option name="LAST_COMMIT_MESSAGE" value="json works" />
+    <MESSAGE value="solve button" />
+    <option name="LAST_COMMIT_MESSAGE" value="solve button" />
   </component>
 </project>
