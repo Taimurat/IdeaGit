@@ -77,6 +77,10 @@ public class Task {
      */
     private static final int DELIMITER_ORDER = 10;
     /**
+     * коэффициент колёсика мыши
+     */
+    private static final float WHEEL_SENSITIVE = 0.001f;
+    /**
      * Задача
      *
      * @param ownCS  СК задачи
@@ -91,6 +95,19 @@ public class Task {
         this.points = points;
         this.crossed = new ArrayList<>();
         this.single = new ArrayList<>();
+    }
+    /**
+     * Масштабирование области просмотра задачи
+     *
+     * @param delta  прокрутка колеса
+     * @param center центр масштабирования
+     */
+    public void scale(float delta, Vector2i center) {
+        if (lastWindowCS == null) return;
+        // получаем координаты центра масштабирования в СК задачи
+        Vector2d realCenter = ownCS.getCoords(center, lastWindowCS);
+        // выполняем масштабирование
+        ownCS.scale(1 + delta * WHEEL_SENSITIVE, realCenter);
     }
 
     /**
