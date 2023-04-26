@@ -4,9 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="render statistic">
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Colors.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelHelp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelHelp.java" afterDir="false" />
+    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/Line.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/app/Rectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/misc/Vector2d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/misc/Vector2d.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelRendering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelRendering.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/UnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/UnitTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,11 +46,13 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;H:/My Project&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -120,7 +129,8 @@
       <workItem from="1682091222644" duration="943000" />
       <workItem from="1682447410095" duration="1102000" />
       <workItem from="1682448634379" duration="147000" />
-      <workItem from="1682530731522" duration="289000" />
+      <workItem from="1682530731522" duration="2059000" />
+      <workItem from="1682534179203" duration="7562000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1677913399113</created>
@@ -367,7 +377,21 @@
       <option name="project" value="LOCAL" />
       <updated>1682090205661</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="render statistic">
+      <created>1682531094317</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1682531094317</updated>
+    </task>
+    <task id="LOCAL-00037" summary="help panel">
+      <created>1682531328406</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1682531328406</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -385,8 +409,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="int vector" />
-    <MESSAGE value="int cs" />
     <MESSAGE value="panel created" />
     <MESSAGE value="render text" />
     <MESSAGE value="text centering works" />
@@ -410,6 +432,8 @@
     <MESSAGE value="scale works" />
     <MESSAGE value="mouse cursor" />
     <MESSAGE value="new computer test comm" />
-    <option name="LAST_COMMIT_MESSAGE" value="new computer test comm" />
+    <MESSAGE value="render statistic" />
+    <MESSAGE value="help panel" />
+    <option name="LAST_COMMIT_MESSAGE" value="help panel" />
   </component>
 </project>

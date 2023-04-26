@@ -114,6 +114,52 @@ public class Vector2d {
     public double length() {
         return Math.sqrt(x * x + y * y);
     }
+    /**
+     * Векторное умножение векторов
+     *
+     * @param v второй вектор
+     * @return результат умножения
+     */
+    public double cross(Vector2d v) {
+        return this.x * v.y - this.y * v.x;
+    }
+    /**
+     * Повернуть вектор
+     *
+     * @param a угол
+     * @return повёрнутый вектор
+     */
+    public Vector2d rotated(double a) {
+        return new Vector2d(
+                x * Math.cos(a) - y * Math.sin(a),
+                x * Math.sin(a) + y * Math.cos(a)
+        );
+    }
+    /**
+     * Нормализация вектора
+     *
+     * @return нормированный вектор
+     */
+    public Vector2d norm() {
+        double length = length();
+        return new Vector2d(x / length, y / length);
+    }
+    /**
+     * Умножение вектора на число
+     *
+     * @return итоговый вектор
+     */
+    public Vector2d mult(double dist) {
+        return new Vector2d(x * dist, y * dist);
+    }
+    /**
+     * Получить целочисленный вектор
+     *
+     * @return целочисленный вектор
+     */
+    public Vector2i intVector() {
+        return new Vector2i((int) x, (int) y);
+    }
 
     /**
      * Строковое представление объекта

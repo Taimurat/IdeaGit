@@ -7,10 +7,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.github.humbleui.jwm.MouseButton;
 import io.github.humbleui.skija.*;
 import lombok.Getter;
-import misc.CoordinateSystem2d;
-import misc.CoordinateSystem2i;
-import misc.Vector2d;
-import misc.Vector2i;
+import misc.*;
 import panels.PanelLog;
 import panels.PanelRendering;
 
@@ -49,9 +46,26 @@ public class Task {
     @Getter
     private final ArrayList<Point> points;
     /**
-     * Размер точки
+     * список отрезков
      */
-    private static final int POINT_SIZE = 3;
+    @Getter
+    private final ArrayList<Line> lines;
+    /**
+     * Какая опорная точка вводится
+     */
+    private int COUNT_POINT_CREATING_RECT = 1;
+    /**
+     * Первая опорная точка
+     */
+    private Vector2d FIRST_POINT;
+    /**
+     * Вторая опорная точка
+     */
+    private Vector2d SECOND_POINT;
+    /**
+     * Опорный отрезок
+     */
+    private Line FIRST_LINE;
     /**
      * Список точек в пересечении
      */
@@ -86,10 +100,12 @@ public class Task {
     @JsonCreator
     public Task(
             @JsonProperty("ownCS") CoordinateSystem2d ownCS,
-            @JsonProperty("points") ArrayList<Point> points
+            @JsonProperty("points") ArrayList<Point> points,
+            @JsonProperty("lines") ArrayList<Line> lines
     ) {
         this.ownCS = ownCS;
         this.points = points;
+        this.lines = lines;
         this.crossed = new ArrayList<>();
         this.single = new ArrayList<>();
     }
@@ -118,19 +134,21 @@ public class Task {
         // создаём перо
         try (var paint = new Paint()) {
             for (Point p : points) {
-                if (!solved) {
-                    paint.setColor(p.getColor());
-                } else {
-                    if (crossed.contains(p))
-                        paint.setColor(CROSSED_COLOR);
-                    else
-                        paint.setColor(SUBTRACTED_COLOR);
-                }
+                paint.setColor(p.getColor());
                 // y-координату разворачиваем, потому что у СК окна ось y направлена вниз,
                 // а в классическом представлении - вверх
                 Vector2i windowPos = windowCS.getCoords(p.pos.x, p.pos.y, ownCS);
                 // рисуем точку
-                canvas.drawRect(Rect.makeXYWH(windowPos.x - POINT_SIZE, windowPos.y - POINT_SIZE, POINT_SIZE * 2, POINT_SIZE * 2), paint);
+                canvas.drawRRect(RRect.makeXYWH(windowPos.x - 3, windowPos.y - 3, 6, 6, 3), paint);
+            }
+            for (Line l : lines) {
+                paint.setColor(l.getColor());
+                // y-координату разворачиваем, потому что у СК окна ось y направлена вниз,
+                // а в классическом представлении - вверх
+                Vector2i windowPos1 = windowCS.getCoords(l.pointA.x, l.pointA.y, ownCS);
+                Vector2i windowPos2 = windowCS.getCoords(l.pointB.x, l.pointB.y, ownCS);
+                // рисуем точку
+                canvas.drawLine(windowPos1.x, windowPos1.y, windowPos2.x, windowPos2.y, paint);
             }
         }
         canvas.restore();
@@ -151,6 +169,14 @@ public class Task {
         renderTask(canvas, windowCS);
     }
     /**
+     * Получить цвет точки по её множеству
+     *
+     * @return цвет точки
+     */
+    public int getColorPoint() {
+        return Misc.getColor(0xCC, 0xFF, 0x00, 0x0);
+    }
+    /**
      * Клик мыши по пространству задачи
      *
      * @param pos         положение мыши
@@ -160,26 +186,55 @@ public class Task {
         if (lastWindowCS == null) return;
         // получаем положение на экране
         Vector2d taskPos = ownCS.getCoords(pos, lastWindowCS);
-        // если левая кнопка мыши, добавляем в первое множество
-        if (mouseButton.equals(MouseButton.PRIMARY)) {
-            addPoint(taskPos, Point.PointSet.FIRST_SET);
-            // если правая, то во второе
-        } else if (mouseButton.equals(MouseButton.SECONDARY)) {
-            addPoint(taskPos, Point.PointSet.SECOND_SET);
+        // добавляем, исходя из того, какая по счёта опорная точка
+        if(COUNT_POINT_CREATING_RECT == 1) {
+            addPoint(taskPos);
+            FIRST_POINT = taskPos;
+            COUNT_POINT_CREATING_RECT = 2;
+        }
+        else if (COUNT_POINT_CREATING_RECT == 2)  {
+            addPoint(taskPos);
+            SECOND_POINT = taskPos;
+            COUNT_POINT_CREATING_RECT = 3;
+            addLine(FIRST_POINT, SECOND_POINT);
+            FIRST_LINE = new Line(FIRST_POINT, SECOND_POINT);
+        }
+        else {
+            addPoint(taskPos);
+            // рассчитываем расстояние от прямой до точки
+            double dist = FIRST_LINE.getDistance(taskPos);
+            // рассчитываем векторы для векторного умножения
+            Vector2d AB = Vector2d.subtract(SECOND_POINT, FIRST_POINT);
+            Vector2d AP = Vector2d.subtract(taskPos, FIRST_POINT);
+            // определяем направление смещения
+            double direction = Math.signum(AB.cross(AP));
+            // получаем вектор смещения
+            Vector2d offset = AB.rotated(Math.PI / 2 * direction).norm().mult(dist);
+
+            // находим координаты вторых двух вершин прямоугольника
+            Vector2d pointC = Vector2d.sum(SECOND_POINT, offset);
+            addPoint(pointC);
+            Vector2d pointD = Vector2d.sum(FIRST_POINT, offset);
+            addPoint(pointD);
+
+            // рисуем его стороны
+            addLine(SECOND_POINT, pointC);
+            addLine(pointC, pointD);
+            addLine(pointD, FIRST_POINT);
+            COUNT_POINT_CREATING_RECT = 1;
         }
     }
     /**
      * Добавить точку
      *
      * @param pos      положение
-     * @param pointSet множество
      */
-    public void addPoint(Vector2d pos, Point.PointSet pointSet) {
+    public void addPoint(Vector2d pos) {
         solved = false;
-        Point newPoint = new Point(pos, pointSet);
+        Point newPoint = new Point(pos);
         points.add(newPoint);
         // Добавляем в лог запись информации
-        PanelLog.info("точка " + newPoint + " добавлена в " + newPoint.getSetName());
+        PanelLog.info("точка " + newPoint + " создана");
     }
     /**
      * Добавить случайные точки
@@ -203,13 +258,19 @@ public class Task {
             // получаем координаты в СК задачи
             Vector2d pos = ownCS.getCoords(gridPos, addGrid);
             // сработает примерно в половине случаев
-            if (ThreadLocalRandom.current().nextBoolean())
-                addPoint(pos, Point.PointSet.FIRST_SET);
-            else
-                addPoint(pos, Point.PointSet.SECOND_SET);
+            addPoint(pos);
         }
     }
-
+    /**
+     * Добавить отрезок
+     */
+    public void addLine(Vector2d fps, Vector2d sps) {
+        solved = false;
+        Line newLine = new Line(fps, sps);
+        lines.add(newLine);
+        // Добавляем в лог запись информации
+        PanelLog.info("отрезок " + newLine + " создана");
+    }
     /**
      * Очистить задачу
      */
@@ -227,18 +288,7 @@ public class Task {
 
         // перебираем пары точек
         for (int i = 0; i < points.size(); i++) {
-            for (int j = i + 1; j < points.size(); j++) {
-                // сохраняем точки
-                Point a = points.get(i);
-                Point b = points.get(j);
-                // если точки совпадают по положению
-                if (a.pos.equals(b.pos) && !a.pointSet.equals(b.pointSet)) {
-                    if (!crossed.contains(a)){
-                        crossed.add(a);
-                        crossed.add(b);
-                    }
-                }
-            }
+            /**/
         }
 
         /// добавляем вс
