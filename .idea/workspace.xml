@@ -4,7 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="mouse cursor" />
+    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="new computer test comm">
+      <change afterPath="$PROJECT_DIR$/src/main/java/misc/Stats.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/misc/SumQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Colors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelRendering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelRendering.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/conf.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,7 +44,10 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;last_opened_file_path&quot;: &quot;H:/My Project&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -110,6 +120,11 @@
       <workItem from="1681464375597" duration="1739000" />
       <workItem from="1681543244885" duration="144000" />
       <workItem from="1682069249662" duration="1830000" />
+      <workItem from="1682090116387" duration="1067000" />
+      <workItem from="1682091222644" duration="943000" />
+      <workItem from="1682447410095" duration="1102000" />
+      <workItem from="1682448634379" duration="147000" />
+      <workItem from="1682530731522" duration="289000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1677913399113</created>
@@ -349,7 +364,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682071062336</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="new computer test comm">
+      <created>1682090205661</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1682090205661</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -367,7 +389,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="drawign rect works" />
     <MESSAGE value="int vector" />
     <MESSAGE value="int cs" />
     <MESSAGE value="panel created" />
@@ -392,6 +413,7 @@
     <MESSAGE value="cs rendering" />
     <MESSAGE value="scale works" />
     <MESSAGE value="mouse cursor" />
-    <option name="LAST_COMMIT_MESSAGE" value="mouse cursor" />
+    <MESSAGE value="new computer test comm" />
+    <option name="LAST_COMMIT_MESSAGE" value="new computer test comm" />
   </component>
 </project>
