@@ -53,6 +53,7 @@ public class PanelHelp extends GridPanel {
         shortcuts.add(new Shortcut("O", true, "Открыть"));
         shortcuts.add(new Shortcut("S", true, "Сохранить"));
         shortcuts.add(new Shortcut("H", true, "Свернуть"));
+        shortcuts.add(new Shortcut("F", true, "Убрать/отобразить график фпс"));
         shortcuts.add(new Shortcut("1", true, "Во весь экран/Обычный размер"));
         shortcuts.add(new Shortcut("2", true, "Полупрозрачное окно/обычное"));
         shortcuts.add(new Shortcut("Esc", false, "Закрыть окно"));

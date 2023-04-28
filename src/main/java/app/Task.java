@@ -30,9 +30,14 @@ public class Task {
      */
     public static final String TASK_TEXT = """
             ПОСТАНОВКА ЗАДАЧИ:
-            Заданы два множества точек в вещественном
-            пространстве. Требуется построить пересечение
-            и разность этих множеств""";
+            На плоскости задано множество прямоугольников. 
+            Найти такую пару пересекающихся прямоугольников, 
+            что площадь фигуры, находящейся внутри обоих 
+            прямоугольников, будет максимальна. В качестве ответа: 
+            выделить эту пару прямоугольников, выделить контур 
+            фигуры, находящейся внутри обоих треугольников, 
+            желательно "залить цветом" внутреннее пространство этой 
+            фигуры.""";
 
 
     /**
@@ -51,33 +56,46 @@ public class Task {
     @Getter
     private final ArrayList<Line> lines;
     /**
+     * Список прямоугольников
+     */
+    @Getter
+    private final ArrayList<Rectangle> rectangles;
+    /**
      * Какая опорная точка вводится
      */
+    @Getter
+    @JsonIgnore
     private int COUNT_POINT_CREATING_RECT = 1;
     /**
      * Первая опорная точка
      */
+    @Getter
+    @JsonIgnore
     private Vector2d FIRST_POINT;
     /**
      * Вторая опорная точка
      */
+    @Getter
+    @JsonIgnore
     private Vector2d SECOND_POINT;
     /**
      * Опорный отрезок
      */
+    @Getter
+    @JsonIgnore
     private Line FIRST_LINE;
     /**
      * Список точек в пересечении
      */
     @Getter
     @JsonIgnore
-    private final ArrayList<Point> crossed;
+    private Rectangle ansrectf;
     /**
      * Список точек в разности
      */
     @Getter
     @JsonIgnore
-    private final ArrayList<Point> single;
+    private Rectangle ansrects;
     /**
      * последняя СК окна
      */
@@ -101,13 +119,17 @@ public class Task {
     public Task(
             @JsonProperty("ownCS") CoordinateSystem2d ownCS,
             @JsonProperty("points") ArrayList<Point> points,
-            @JsonProperty("lines") ArrayList<Line> lines
+            @JsonProperty("lines") ArrayList<Line> lines,
+            @JsonProperty("rectangles") ArrayList<Rectangle> rectangles
     ) {
         this.ownCS = ownCS;
         this.points = points;
         this.lines = lines;
-        this.crossed = new ArrayList<>();
-        this.single = new ArrayList<>();
+        this.ansrectf = new Rectangle(new Vector2d(0, 0), new Vector2d(0, 0), new Vector2d(0, 0), new Vector2d(0, 0),
+                new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)));
+        this.ansrects = new Rectangle(new Vector2d(0, 0), new Vector2d(0, 0), new Vector2d(0, 0), new Vector2d(0, 0),
+                new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)));;
+        this.rectangles = rectangles;
     }
     /**
      * Масштабирование области просмотра задачи
@@ -120,7 +142,7 @@ public class Task {
         // получаем координаты центра масштабирования в СК задачи
         Vector2d realCenter = ownCS.getCoords(center, lastWindowCS);
         // выполняем масштабирование
-        ownCS.scale(1 + delta * WHEEL_SENSITIVE, realCenter);
+        ownCS.scale(1 + -delta * WHEEL_SENSITIVE, realCenter);
     }
 
     /**
@@ -169,14 +191,6 @@ public class Task {
         renderTask(canvas, windowCS);
     }
     /**
-     * Получить цвет точки по её множеству
-     *
-     * @return цвет точки
-     */
-    public int getColorPoint() {
-        return Misc.getColor(0xCC, 0xFF, 0x00, 0x0);
-    }
-    /**
      * Клик мыши по пространству задачи
      *
      * @param pos         положение мыши
@@ -218,10 +232,18 @@ public class Task {
             addPoint(pointD);
 
             // рисуем его стороны
+            Line BC = new Line(SECOND_POINT, pointC);
             addLine(SECOND_POINT, pointC);
+            Line CD = new Line(pointC, pointD);
             addLine(pointC, pointD);
+            Line DA = new Line(pointD, FIRST_POINT);
             addLine(pointD, FIRST_POINT);
             COUNT_POINT_CREATING_RECT = 1;
+
+            // создаём
+
+            addRectangle(FIRST_POINT, SECOND_POINT, pointC, pointD,
+                    FIRST_LINE, BC, CD, DA);
         }
     }
     /**
@@ -235,6 +257,29 @@ public class Task {
         points.add(newPoint);
         // Добавляем в лог запись информации
         PanelLog.info("точка " + newPoint + " создана");
+    }
+    /**
+     * Добавить точку
+     *
+     * @param pos      положение
+     */
+    public void addPointInter(Vector2d pos) {
+        solved = false;
+        Point newPoint = new Point(pos);
+        newPoint.intersect();
+        points.add(newPoint);
+        // Добавляем в лог запись информации
+        PanelLog.info("точка " + newPoint + " создана");
+    }
+    /**
+     * добавить пересечения отрезок
+     */
+    public void addLineInter(Vector2d first, Vector2d second) {
+        solved = false;
+        Line newLine = new Line(first, second);
+        newLine.addtoans();
+        lines.add(newLine);
+        PanelLog.info("отрезок " + newLine + " создан");
     }
     /**
      * Добавить случайные точки
@@ -269,7 +314,99 @@ public class Task {
         Line newLine = new Line(fps, sps);
         lines.add(newLine);
         // Добавляем в лог запись информации
-        PanelLog.info("отрезок " + newLine + " создана");
+        PanelLog.info("отрезок " + newLine + " создан");
+    }
+    /**
+    * Добавить прямоугольник
+     */
+    public void addRectangle(Vector2d A, Vector2d B, Vector2d C, Vector2d D, Line AB, Line BC, Line CD, Line DA) {
+        solved = false;
+        Rectangle newRectangle = new Rectangle(A, B, C, D, AB, BC, CD, DA);
+        rectangles.add(newRectangle);
+        // Добавляем в лог запись информации
+        PanelLog.info("прямоугольник " + newRectangle + " создан");
+    }
+    /**
+     * сортировка точек для выпуклой фигуры
+     *
+     * @param mass список точек
+     * @return отсортированный список
+     */
+    public ArrayList<Vector2d> sortForCF(ArrayList<Vector2d> mass) {
+        ArrayList<Vector2d> ans = new ArrayList<>();
+        if (mass.size() != 0) {
+            Vector2d first = mass.get(0);
+            for (Vector2d point : mass) {
+                if (point.x < first.x ||
+                        point.x == first.x && point.y > first.y) {
+                    first = point;
+                }
+            }
+            ans.add(first);
+            mass.remove(first);
+            while (mass.size() != 0) {
+                Vector2d Point = mass.get(0);
+                for (Vector2d point : mass) {
+                    double a1 = Math.atan((point.x - first.x) / (first.y - point.y));
+                    double a2 = Math.atan((Point.x - first.x) / (first.y - Point.y));
+                    if (a1 < 0) {a1 += Math.PI;}
+                    if (a2 < 0) {a2 += Math.PI;}
+                    if (a1 < a2) {
+                        Point = point;
+                    }
+                }
+                ans.add(Point);
+                mass.remove(Point);
+            }
+        }
+        return ans;
+    }
+    /**
+     * нахождение фигуры пересечения
+     */
+    public ArrayList<Vector2d> getIntersRect(Rectangle first, Rectangle second) {
+        ArrayList<Vector2d> ans = new ArrayList<>();
+        for (Line linef : first.getlistlines()) {
+            for (Line lines : second.getlistlines()) {
+                if (linef.isIntersLines(lines) && linef.getIntersLines(lines).isBelongSegment(linef, lines)) {
+                    ans.add(linef.getIntersLines(lines));
+                    PanelLog.info("Точка пересечения " + linef.getIntersLines(lines) + " обработана\n");
+                    addPoint(linef.getIntersLines(lines));
+                }
+            }
+        }
+        for (Vector2d point : first.getlistpoints()) {
+            if (point.isIntersRect(second)) {
+                ans.add(point);
+                PanelLog.info("Точка объединения " + point + " обработана\n");
+                addPoint(point);
+            }
+        }
+        for (Vector2d point : second.getlistpoints()) {
+            if (point.isIntersRect(first)) {
+                ans.add(point);
+                PanelLog.info("Точка объединения " + point + " обработана\n");
+                addPoint(point);
+            }
+        }
+        PanelLog.info("индексировано пересечение " + ans);
+        return sortForCF(ans);
+    }
+    /**
+     * нахождение площади пересечения
+     */
+    public double getAreaIntersRect(Rectangle first, Rectangle second) {
+        double s = 0;
+        ArrayList<Vector2d> intersection =  getIntersRect(first, second);
+        if (intersection.size() != 0) {
+            intersection.add(intersection.get(0));
+            //Вычисление площади пересечения по методу Гаусса
+            for (int i = 0; i < intersection.size() - 1; i++) {
+                s += intersection.get(i).x * intersection.get(i + 1).y - intersection.get(i + 1).x * intersection.get(i).y;
+            }
+        }
+
+        return Math.abs(s / 2);
     }
     /**
      * Очистить задачу
@@ -282,19 +419,27 @@ public class Task {
      * Решить задачу
      */
     public void solve() {
-        // очищаем списки
-        crossed.clear();
-        single.clear();
 
-        // перебираем пары точек
-        for (int i = 0; i < points.size(); i++) {
-            /**/
+        double smax = 0;
+        // перебираем пары прямоугольников
+        for (int i = 0; i < rectangles.size() - 1; i++) {
+            for (int j = i + 1; j < rectangles.size(); j++) {
+                double s = getAreaIntersRect(rectangles.get(i), rectangles.get(j));
+                if (s > smax) { smax = s; ansrectf = rectangles.get(i); ansrects = rectangles.get(j); }
+            }
         }
-
-        /// добавляем вс
-        for (Point point : points)
-            if (!crossed.contains(point))
-                single.add(point);
+        ArrayList<Vector2d> ans = sortForCF(getIntersRect(ansrectf, ansrects));
+        if (ans.size() != 0) {
+            ans.add(ans.get(0));
+            // выделяем пару
+            for (int i = 0; i < ans.size() - 1; i++) {
+                addPointInter(ans.get(i));
+                addLineInter(ans.get(i), ans.get(i + 1));
+            }
+        }
+        else {
+            PanelLog.info("Пересечений прямоугольников нет\n");
+        }
 
         // задача решена
         solved = true;

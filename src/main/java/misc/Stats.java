@@ -1,8 +1,6 @@
 package misc;
 
 import io.github.humbleui.skija.*;
-import misc.CoordinateSystem2i;
-import misc.SumQueue;
 
 import static app.Colors.*;
 
@@ -24,31 +22,34 @@ public class Stats {
     /**
      * Рисование
      *
-     * @param canvas   область рисования
-     * @param windowCS СК окна
-     * @param font     шрифт
-     * @param padding  отступ
+     * @param canvas         область рисования
+     * @param windowCS       СК окна
+     * @param font           шрифт
+     * @param padding        отступ
+     * @param isneedfpsgrahp нужно ли рисовать полоску фпс
      */
-    public void paint(Canvas canvas, CoordinateSystem2i windowCS, Font font, int padding) {
+    public void paint(Canvas canvas, CoordinateSystem2i windowCS, Font font, int padding, boolean isneedfpsgrahp) {
         // создаём кисть
         try (var paint = new Paint()) {
             // сохраняем область рисования
             canvas.save();
-            // смещаем
-            canvas.translate(padding, windowCS.getSize().y - padding - 32);
-            // задаём цвет подложки
-            paint.setColor(STATS_BACKGROUND_COLOR);
-            // X, Y, ширина, высота,
-            // радиусы скругления для каждого угла
-            canvas.drawRRect(RRect.makeXYWH(
-                    0, 0, windowCS.getSize().x - padding * 2, 32,
-                    4, 4, 0, 0), paint);
-            paint.setColor(STATS_COLOR);
+            if (isneedfpsgrahp) {
+                // смещаем
+                canvas.translate(padding, windowCS.getSize().y - padding - 32);
+                // задаём цвет подложки
+                paint.setColor(STATS_BACKGROUND_COLOR);
+                // X, Y, ширина, высота,
+                // радиусы скругления для каждого угла
+                canvas.drawRRect(RRect.makeXYWH(
+                        0, 0, windowCS.getSize().x - padding * 2, 32,
+                        4, 4, 0, 0), paint);
+                paint.setColor(STATS_COLOR);
 
-            // рисуем сам график
-            for (int i = 0; i < deltaTimes.getLength(); i++) {
-                float currentDelta = deltaTimes.get(i);
-                canvas.drawRect(Rect.makeXYWH(i, Math.min(windowCS.getSize().y, 32 - currentDelta), 1, currentDelta), paint);
+                // рисуем сам график, если надо
+                    for (int i = 0; i < deltaTimes.getLength(); i++) {
+                        float currentDelta = deltaTimes.get(i);
+                        canvas.drawRect(Rect.makeXYWH(i, Math.min(windowCS.getSize().y, 32 - currentDelta), 1, currentDelta), paint);
+                    }
             }
 
             // рассчитываем длину очереди

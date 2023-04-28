@@ -17,6 +17,11 @@ public class Point {
      * Координаты точки
      */
     public final Vector2d pos;
+    /**
+     * выделение
+     */
+    @JsonIgnore
+    public boolean isinters;
 
     /**
      * Конструктор точки
@@ -26,6 +31,7 @@ public class Point {
     @JsonCreator
     public Point(@JsonProperty("pos") Vector2d pos) {
         this.pos = pos;
+        isinters = false;
     }
 
     /**
@@ -60,11 +66,17 @@ public class Point {
         return Objects.hash(pos);
     }
     /**
-     * Получить цвет точки по её множеству
+     * Получить цвет точки
      *
      * @return цвет точки
      */
     public int getColor() {
-        return Misc.getColor(0xCC, 0xFF, 0x00, 0x0);
+        return isinters ? Misc.getColor(0xCC, 0xF8, 0x3B, 0xBB) : Misc.getColor(0xCC, 0x00, 0xFF, 0x0);
+    }
+    /**
+     * пометить точку
+     */
+    public void intersect() {
+        isinters = true;
     }
 }

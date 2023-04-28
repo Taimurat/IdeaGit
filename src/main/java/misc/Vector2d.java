@@ -1,7 +1,13 @@
 package misc;
 
 
+import app.Line;
+import app.Rectangle;
+
 import java.util.concurrent.ThreadLocalRandom;
+
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 /**
  * Класс двумерного вектора double
@@ -15,7 +21,6 @@ public class Vector2d {
      * y - координата вектора
      */
     public double y;
-
     /**
      * Конструктор вектора
      *
@@ -114,6 +119,7 @@ public class Vector2d {
     public double length() {
         return Math.sqrt(x * x + y * y);
     }
+
     /**
      * Векторное умножение векторов
      *
@@ -123,6 +129,7 @@ public class Vector2d {
     public double cross(Vector2d v) {
         return this.x * v.y - this.y * v.x;
     }
+
     /**
      * Повернуть вектор
      *
@@ -135,6 +142,7 @@ public class Vector2d {
                 x * Math.sin(a) + y * Math.cos(a)
         );
     }
+
     /**
      * Нормализация вектора
      *
@@ -144,6 +152,7 @@ public class Vector2d {
         double length = length();
         return new Vector2d(x / length, y / length);
     }
+
     /**
      * Умножение вектора на число
      *
@@ -152,6 +161,7 @@ public class Vector2d {
     public Vector2d mult(double dist) {
         return new Vector2d(x * dist, y * dist);
     }
+
     /**
      * Получить целочисленный вектор
      *
@@ -209,6 +219,28 @@ public class Vector2d {
         temp = Double.doubleToLongBits(y);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
+    }
+
+    /**
+     * принадлежит ли точка сразу двум отрезкам
+     *
+     * @f первый отрезок
+     * @s второй отрезок
+     */
+    public boolean isBelongSegment(Line f, Line s) {
+        return max(f.pointA.x, f.pointB.x) >= x && x >= min(f.pointA.x, f.pointB.x) && max(f.pointA.y, f.pointB.y) >= y && y >= min(f.pointA.y, f.pointB.y) &&
+                max(s.pointA.x, s.pointB.x) >= x && x >= min(s.pointA.x, s.pointB.x) && max(s.pointA.y, s.pointB.y) >= y && y >= min(s.pointA.y, s.pointB.y);
+    }
+
+    /**
+     * принадлежит ли точка прямоугольнику
+     */
+    public boolean isIntersRect(Rectangle rect) {
+        double width = Math.sqrt((rect.pointB.x - rect.pointC.x) * (rect.pointB.x - rect.pointC.x) + (rect.pointB.y - rect.pointC.y) * (rect.pointB.y - rect.pointC.y));
+        double height = Math.sqrt((rect.pointC.x - rect.pointD.x) * (rect.pointC.x - rect.pointD.x) + (rect.pointD.y - rect.pointC.y) * (rect.pointD.y - rect.pointC.y));
+
+        return Math.abs(rect.AB.getDistance(this) + rect.CD.getDistance(this) - width) < 0.001 &&
+                Math.abs(rect.BC.getDistance(this) + rect.DA.getDistance(this) - height) < 0.001;
     }
 
 }

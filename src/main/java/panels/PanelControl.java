@@ -167,9 +167,9 @@ public class PanelControl extends GridPanel {
         solve.setOnClick(() -> {
             if (!PanelRendering.task.isSolved()) {
                 PanelRendering.task.solve();
-                String s = "Задача решена\n" +
-                        "Пересечений: " + PanelRendering.task.getCrossed().size() / 2 + "\n" +
-                        "Отдельных точек: " + PanelRendering.task.getSingle().size();
+                String s = "Задача решена\n";// +
+                        //"Пара прямоугольников: " + PanelRendering.task.getIntersRect() + "\n" +
+                        //"Площадь: " + PanelRendering.task.getAreaIntersRect();
                 PanelLog.success(s);
                 solve.text = "Сбросить";
             } else {

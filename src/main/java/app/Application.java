@@ -176,6 +176,7 @@ public class Application implements Consumer<Event> {
                         case H -> window.minimize();
                         case S -> PanelRendering.save();
                         case O -> PanelRendering.load();
+                        case F -> PanelRendering.changeisneedfpsgraph();
                         case DIGIT1 -> {
                             if (maximizedWindow)
                                 window.restore();

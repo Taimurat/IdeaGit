@@ -1,8 +1,6 @@
 package panels;
 
-import app.Point;
 import app.Task;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.humbleui.jwm.Event;
 import io.github.humbleui.jwm.EventMouseButton;
@@ -17,7 +15,6 @@ import misc.Vector2d;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.concurrent.ThreadLocalRandom;
 
 import static app.Fonts.FONT12;
 
@@ -34,6 +31,10 @@ public class PanelRendering extends GridPanel {
      * Статистика fps
      */
     private final Stats fpsStats;
+    /**
+     * надо ли отображать полоску фпс
+     */
+    public static boolean paramisneedfpsgraph = true;
     /**
      * Сохранить файл
      */
@@ -53,7 +54,7 @@ public class PanelRendering extends GridPanel {
      */
     public static void load() {
         String path = "src/main/resources/conf.json";
-        PanelLog.info("load from " + path);
+        PanelLog.info("загрузка из " + path);
         loadFromFile(path);
     }
 
@@ -83,9 +84,7 @@ public class PanelRendering extends GridPanel {
         );
 
         // создаём задачу без точек
-        task = new Task(cs, new ArrayList<>(), new ArrayList<>());
-        // добавляем в нё 10 случайных
-        task.addRandomPoints(10);
+        task = new Task(cs, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         fpsStats = new Stats();
 
     }
@@ -126,9 +125,15 @@ public class PanelRendering extends GridPanel {
     public void paintImpl(Canvas canvas, CoordinateSystem2i windowCS) {
         task.paint(canvas, windowCS);
         // рисуем статистику фпс
-        fpsStats.paint(canvas, windowCS, FONT12, padding);
+        fpsStats.paint(canvas, windowCS, FONT12, padding, paramisneedfpsgraph);
         if (lastInside && lastMove != null)
             task.paintMouse(canvas, windowCS, FONT12, lastWindowCS.getRelativePos(lastMove));
+    }
+    /**
+     * отобразить/скрыть график фпс
+     */
+    public static void changeisneedfpsgraph() {
+        paramisneedfpsgraph = !paramisneedfpsgraph;
     }
 
     /**
