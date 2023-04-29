@@ -2,9 +2,7 @@ package app;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import misc.Misc;
 import misc.Vector2d;
-import app.Line;
 
 import java.util.ArrayList;
 
@@ -95,7 +93,7 @@ public class Rectangle {
      * добавлен в решение
      */
     public void addtoansR () {
-        AB.addtoans(); BC.addtoans(); CD.addtoans(); DA.addtoans();
+        AB.addToAns(); BC.addToAns(); CD.addToAns(); DA.addToAns();
     }
     /**
      * получить список отрезков

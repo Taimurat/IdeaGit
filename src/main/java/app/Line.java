@@ -1,7 +1,6 @@
 package app;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import misc.Misc;
 import misc.Vector2d;
 
@@ -32,7 +31,7 @@ public class Line {
     /**
      * принадлежит ли отрезок к ответу
      */
-    private boolean isans;
+    private boolean isAns;
 
     /**
      * Конструктор линии
@@ -44,7 +43,7 @@ public class Line {
     public Line(Vector2d pointA, Vector2d pointB) {
         this.pointA = pointA;
         this.pointB = pointB;
-        this.isans = false;
+        this.isAns = false;
 
         a = pointA.y - pointB.y;
         b = pointB.x - pointA.x;
@@ -75,8 +74,15 @@ public class Line {
     /**
      * добавить к ответу
      */
-    public void addtoans() {
-        isans = true;
+    public void addToAns() {
+        isAns = true;
+    }
+
+    /**
+     * добавить к ответу
+     */
+    public void RemoveFromAns() {
+        isAns = false;
     }
     /**
      * Получить цвет отрезка по его множеству
@@ -84,7 +90,7 @@ public class Line {
      * @return цвет отрезка
      */
     public int getColor() {
-        return (isans ? Misc.getColor(0xCC, 0x00, 0xFF, 0x00) : Misc.getColor(0xCC, 0xFF, 0xFF, 0xFF));
+        return (isAns ? Misc.getColor(0xCC, 0x00, 0xFF, 0x00) : Misc.getColor(0xCC, 0xFF, 0xFF, 0xFF));
     }
     /**
      * пересекаются ли прямые

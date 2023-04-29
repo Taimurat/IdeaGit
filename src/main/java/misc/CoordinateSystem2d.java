@@ -3,7 +3,6 @@ package misc;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
 import panels.PanelLog;
 
 import java.util.Objects;
@@ -84,8 +83,7 @@ public class CoordinateSystem2d {
      */
     @JsonIgnore
     public Vector2d getRandomCoords() {
-        Vector2d r = Vector2d.rand(min, max);
-        return r;
+        return Vector2d.rand(min, max);
     }
 
     /**

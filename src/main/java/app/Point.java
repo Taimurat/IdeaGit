@@ -3,7 +3,6 @@ package app;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
 import misc.Misc;
 import misc.Vector2d;
 
@@ -21,7 +20,7 @@ public class Point {
      * выделение
      */
     @JsonIgnore
-    public boolean isinters;
+    public boolean isInters;
 
     /**
      * Конструктор точки
@@ -31,7 +30,7 @@ public class Point {
     @JsonCreator
     public Point(@JsonProperty("pos") Vector2d pos) {
         this.pos = pos;
-        isinters = false;
+        isInters = false;
     }
 
     /**
@@ -71,12 +70,12 @@ public class Point {
      * @return цвет точки
      */
     public int getColor() {
-        return isinters ? Misc.getColor(0xCC, 0xF8, 0x3B, 0xBB) : Misc.getColor(0xCC, 0x00, 0xFF, 0x0);
+        return isInters ? Misc.getColor(0xCC, 0xF8, 0x3B, 0xBB) : Misc.getColor(0xCC, 0x00, 0xFF, 0x0);
     }
     /**
      * пометить точку
      */
     public void intersect() {
-        isinters = true;
+        isInters = true;
     }
 }

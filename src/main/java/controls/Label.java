@@ -7,7 +7,6 @@ import io.github.humbleui.skija.Paint;
 import io.github.humbleui.skija.TextLine;
 import misc.CoordinateSystem2i;
 import panels.GridPanel;
-import panels.Panel;
 
 import static app.Colors.LABEL_TEXT_COLOR;
 import static app.Fonts.FONT12;

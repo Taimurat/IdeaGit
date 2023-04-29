@@ -224,8 +224,8 @@ public class Vector2d {
     /**
      * принадлежит ли точка сразу двум отрезкам
      *
-     * @f первый отрезок
-     * @s второй отрезок
+     * @param f первый отрезок
+     * @param s второй отрезок
      */
     public boolean isBelongSegment(Line f, Line s) {
         return max(f.pointA.x, f.pointB.x) >= x && x >= min(f.pointA.x, f.pointB.x) && max(f.pointA.y, f.pointB.y) >= y && y >= min(f.pointA.y, f.pointB.y) &&

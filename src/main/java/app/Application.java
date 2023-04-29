@@ -1,15 +1,11 @@
 package app;
 
 import controls.InputFactory;
-import controls.Label;
 import io.github.humbleui.jwm.*;
 import io.github.humbleui.jwm.skija.EventFrameSkija;
 import io.github.humbleui.skija.Canvas;
-import io.github.humbleui.skija.Paint;
-import io.github.humbleui.skija.RRect;
 import io.github.humbleui.skija.Surface;
 import misc.CoordinateSystem2i;
-import misc.Misc;
 import panels.PanelControl;
 import panels.PanelHelp;
 import panels.PanelLog;
@@ -48,10 +44,6 @@ public class Application implements Consumer<Event> {
      * панель событий
      */
     private final PanelLog panelLog;
-    /**
-     * Представление проблемы
-     */
-    public static Task task;
     /**
      * кнопка изменений: у мака - это `Command`, у windows - `Ctrl`
      */
