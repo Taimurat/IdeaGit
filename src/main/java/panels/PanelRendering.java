@@ -34,7 +34,7 @@ public class PanelRendering extends GridPanel {
     /**
      * надо ли отображать полоску фпс
      */
-    public static boolean paramisneedfpsgraph = true;
+    public static boolean paramIsNeedFPSGraph = true;
     /**
      * Сохранить файл
      */
@@ -84,7 +84,7 @@ public class PanelRendering extends GridPanel {
         );
 
         // создаём задачу без точек
-        task = new Task(cs, new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        task = new Task(cs, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         fpsStats = new Stats();
 
     }
@@ -125,15 +125,15 @@ public class PanelRendering extends GridPanel {
     public void paintImpl(Canvas canvas, CoordinateSystem2i windowCS) {
         task.paint(canvas, windowCS);
         // рисуем статистику фпс
-        fpsStats.paint(canvas, windowCS, FONT12, padding, paramisneedfpsgraph);
+        fpsStats.paint(canvas, windowCS, FONT12, padding, paramIsNeedFPSGraph);
         if (lastInside && lastMove != null)
             task.paintMouse(canvas, windowCS, FONT12, lastWindowCS.getRelativePos(lastMove));
     }
     /**
      * отобразить/скрыть график фпс
      */
-    public static void changeisneedfpsgraph() {
-        paramisneedfpsgraph = !paramisneedfpsgraph;
+    public static void changeIsNeedFPSGraph() {
+        paramIsNeedFPSGraph = !paramIsNeedFPSGraph;
     }
 
     /**

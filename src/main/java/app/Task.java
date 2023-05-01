@@ -53,6 +53,11 @@ public class Task {
     @Getter
     private final ArrayList<Line> lines;
     /**
+     * список отрезков штриховки
+     */
+    @Getter
+    private final ArrayList<Line> hatchingLines;
+    /**
      * Список прямоугольников
      */
     @Getter
@@ -118,7 +123,8 @@ public class Task {
             @JsonProperty("ownCS") CoordinateSystem2d ownCS,
             @JsonProperty("points") ArrayList<Point> points,
             @JsonProperty("lines") ArrayList<Line> lines,
-            @JsonProperty("rectangles") ArrayList<Rectangle> rectangles
+            @JsonProperty("rectangles") ArrayList<Rectangle> rectangles,
+            @JsonProperty("hatchingLines") ArrayList<Line> hatchingLines
     ) {
         this.ownCS = ownCS;
         this.points = points;
@@ -128,6 +134,7 @@ public class Task {
         this.ansRectS = new Rectangle(new Vector2d(0, 0), new Vector2d(0, 0), new Vector2d(0, 0), new Vector2d(0, 0),
                 new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)));
         this.rectangles = rectangles;
+        this.hatchingLines = hatchingLines;
     }
 
     /**
@@ -163,6 +170,15 @@ public class Task {
                 canvas.drawRRect(RRect.makeXYWH(windowPos.x - 3, windowPos.y - 3, 6, 6, 3), paint);
             }
             for (Line l : lines) {
+                paint.setColor(l.getColor());
+                // y-координату разворачиваем, потому что у СК окна ось y направлена вниз,
+                // а в классическом представлении - вверх
+                Vector2i windowPos1 = windowCS.getCoords(l.pointA.x, l.pointA.y, ownCS);
+                Vector2i windowPos2 = windowCS.getCoords(l.pointB.x, l.pointB.y, ownCS);
+                // рисуем точку
+                canvas.drawLine(windowPos1.x, windowPos1.y, windowPos2.x, windowPos2.y, paint);
+            }
+            for (Line l : hatchingLines) {
                 paint.setColor(l.getColor());
                 // y-координату разворачиваем, потому что у СК окна ось y направлена вниз,
                 // а в классическом представлении - вверх
@@ -280,6 +296,16 @@ public class Task {
         newLine.addToAns();
         lines.add(newLine);
         PanelLog.info("отрезок " + newLine + " создан");
+    }
+
+    /**
+     * добавить отрезок штриховки
+     */
+    public void addLineHatching(Vector2d first, Vector2d second) {
+        Line newLine = new Line(first, second);
+        newLine.addToAns();
+        hatchingLines.add(newLine);
+        PanelLog.info("отрезок штриховки " + newLine + " создан");
     }
 
     /**
@@ -412,11 +438,30 @@ public class Task {
             intersection.add(intersection.get(0));
             //Вычисление площади пересечения по методу Гаусса
             for (int i = 0; i < intersection.size() - 1; i++) {
-                s += intersection.get(i).x * intersection.get(i + 1).y - intersection.get(i + 1).x * intersection.get(i).y;
+                s += intersection.get(i).x * -intersection.get(i + 1).y - intersection.get(i + 1).x * -intersection.get(i).y;
             }
         }
 
         return Math.abs(s / 2);
+    }
+    /**
+     * получить экстремальные значения
+     *
+     * @return минимум по X, минимум по Y, максимум по X, максимум по Y
+     */
+    public ArrayList<Double> getExtremum(ArrayList<Vector2d> rect) {
+
+        double minX = rect.get(0).x, minY = rect.get(0).y, maxX = rect.get(0).x, maxY = rect.get(0).y;
+
+        for (Vector2d point : rect) {
+            if (point.x < minX) { minX = point.x; }
+            if (point.y < minY) { minY = point.y; }
+            if (point.x > maxX) { maxX = point.x; }
+            if (point.y > maxY) { maxY = point.y; }
+        }
+
+        ArrayList<Double> res = new ArrayList<>(); res.add(minX); res.add(minY); res.add(maxX); res.add(maxY);
+        return res;
     }
 
     /**
@@ -424,6 +469,10 @@ public class Task {
      */
     public void clear() {
         points.clear();
+        lines.clear();
+        rectangles.clear();
+        hatchingLines.clear();
+        COUNT_POINT_CREATING_RECT = 1;
         solved = false;
     }
 
@@ -432,8 +481,10 @@ public class Task {
      */
     public void solve() {
 
-        for (Line l : lines)
+        for (Line l : lines) {
             l.RemoveFromAns();
+            hatchingLines.clear();
+        }
 
         double sMax = 0;
         // перебираем пары прямоугольников
@@ -455,6 +506,29 @@ public class Task {
                 addPointInter(ans.get(i));
                 addLineInter(ans.get(i), ans.get(i + 1));
             }
+            //штриховка
+            ArrayList<Double> ext = getExtremum(ans);
+            double minX = ext.get(0), minY = ext.get(1), maxX = ext.get(2), maxY = ext.get(3);
+            for (double i = minY + minX; i <= maxY + maxX; i += 0.3) {
+                double a = 1, b = 1, c = -i;
+                Vector2d firstPoint=null; Vector2d secondPoint=null;
+                for (int j = 0; j < ans.size() - 1; j++) {
+                    Line l = new Line(ans.get(j), ans.get(j + 1));
+                    if (l.isInterLines(a, b, c)) {
+                        if (firstPoint == null) {
+                            firstPoint = l.getInterLines(a, b, c);
+                        }
+                        else{
+                            secondPoint = l.getInterLines(a, b, c);
+                        }
+                    }
+                }
+                if (firstPoint != null && secondPoint != null) {
+                    addLineHatching(firstPoint, secondPoint);
+                }
+
+            }
+
         } else {
             PanelLog.info("Пересечений прямоугольников нет\n");
         }

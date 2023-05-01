@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="Rectangle class - done, Line class fixed, Point class fixed, add function finding intersection figure (function work correctly), add function sorting points in array (function work correctly), add function finding the area of intersection (function work correctly), function solve working (function work correctly), add hide/show graph of fps, fixed tests (still not working), point and lines selection work">
+    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="fixed deselection from lines, little script fixed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/Line.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Line.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Point.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Rectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controls/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controls/Button.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controls/Label.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controls/Label.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/misc/CoordinateSystem2d.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/misc/CoordinateSystem2d.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/misc/CoordinateSystem2i.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/misc/CoordinateSystem2i.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelRendering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelRendering.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -136,7 +130,9 @@
       <workItem from="1682607387820" duration="14658000" />
       <workItem from="1682672423862" duration="3231000" />
       <workItem from="1682690241234" duration="15788000" />
-      <workItem from="1682750599541" duration="1979000" />
+      <workItem from="1682750599541" duration="5158000" />
+      <workItem from="1682883963114" duration="1698000" />
+      <workItem from="1682937011944" duration="10026000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1677913399113</created>
@@ -411,7 +407,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682709791220</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="fixed deselection from lines, little script fixed">
+      <created>1682752736989</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1682752736989</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -429,7 +432,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="text centering works" />
     <MESSAGE value="adaptive layout" />
     <MESSAGE value="4 panels" />
     <MESSAGE value="float cs" />
@@ -454,6 +456,7 @@
     <MESSAGE value="help panel" />
     <MESSAGE value="redefinition points, init lines, drawing lines, drawing rectangles work" />
     <MESSAGE value="Rectangle class - done, Line class fixed, Point class fixed, add function finding intersection figure (function work correctly), add function sorting points in array (function work correctly), add function finding the area of intersection (function work correctly), function solve working (function work correctly), add hide/show graph of fps, fixed tests (still not working), point and lines selection work" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rectangle class - done, Line class fixed, Point class fixed, add function finding intersection figure (function work correctly), add function sorting points in array (function work correctly), add function finding the area of intersection (function work correctly), function solve working (function work correctly), add hide/show graph of fps, fixed tests (still not working), point and lines selection work" />
+    <MESSAGE value="fixed deselection from lines, little script fixed" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed deselection from lines, little script fixed" />
   </component>
 </project>

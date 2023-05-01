@@ -3,6 +3,10 @@ package app;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import misc.Misc;
 import misc.Vector2d;
+import panels.PanelLog;
+
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 /**
  * Класс линии
@@ -104,5 +108,31 @@ public class Line {
     public Vector2d getIntersLines(Line other) {
         double x = (other.c * b - c * other.b) / (a * other.b - other.a * b);
         return new Vector2d(x, - a * x / b - c / b);
+    }
+    /**
+     * вспомогательный метод к нижнему
+     */
+    public boolean isInterLines(double aOther, double bOther, double cOther) {
+        double x;
+        if (b != 0) {
+            x = (cOther * b - c * bOther) / (a * bOther - aOther * b);
+            return min(pointA.x, pointB.x) < x && x < max(pointA.x, pointB.x);
+        }
+        x = -c / a;
+        double y = -(aOther * x + cOther) / bOther;
+        return min(pointA.y, pointB.y) < y && y < max(pointA.y, pointB.y);
+    }
+    /**
+     * получить пересечение отрезка и прямой через коэффиценты
+     */
+    public Vector2d getInterLines(double aOther, double bOther, double cOther) {
+        double x;
+        if (b != 0) {
+            x = (cOther * b - c * bOther) / (a * bOther - aOther * b);
+            return new Vector2d(x, -a * x / b - c / b);
+        }
+        x = -c / a;
+        double y = -(aOther * x + cOther) / bOther;
+        return new Vector2d(x, y);
     }
 }
