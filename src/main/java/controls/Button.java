@@ -22,6 +22,14 @@ public class Button extends MultiLineLabel {
      * находится ли сейчас курсор над этой кнопкой
      */
     public boolean selected;
+    /**
+     * текст второй
+     */
+    protected String secondText;
+    /**
+     * режим кнопки
+     */
+    protected int mode;
 
     /**
      * @param window          окно
@@ -46,6 +54,35 @@ public class Button extends MultiLineLabel {
                 window, drawBG, backgroundColor, padding, gridWidth, gridHeight,
                 gridX, gridY, colspan, rowspan, text, centered, vcentered
         );
+        selected = false;
+    }
+    /**
+     * @param window          окно
+     * @param drawBG          флаг, нужно ли рисовать подложку
+     * @param backgroundColor цвет подложки
+     * @param padding         отступы
+     * @param gridWidth       кол-во ячеек сетки по ширине
+     * @param gridHeight      кол-во ячеек сетки по высоте
+     * @param gridX           координата в сетке x
+     * @param gridY           координата в сетке y
+     * @param colspan         кол-во колонок, занимаемых панелью
+     * @param rowspan         кол-во строк, занимаемых панелью
+     * @param text            текст
+     * @param centered        флаг, нужно ли выравнивать текст по центру по горизонтали
+     * @param vcentered       флаг, нужно ли выравнивать текст по центру по вертикали
+     * @param mode            режим кнопки
+     * @param secondText      второй текст
+     */
+    public Button(
+            Window window, boolean drawBG, int backgroundColor, int padding,
+            int gridWidth, int gridHeight, int gridX, int gridY, int colspan,
+            int rowspan, String text, boolean centered, boolean vcentered, int mode, String secondText) {
+        super(
+                window, drawBG, backgroundColor, padding, gridWidth, gridHeight,
+                gridX, gridY, colspan, rowspan, text, centered, vcentered
+        );
+        this.secondText = secondText;
+        this.mode = mode;
         selected = false;
     }
 
@@ -100,5 +137,17 @@ public class Button extends MultiLineLabel {
      */
     public void checkOver(Vector2i pos) {
         selected = contains(pos);
+    }
+
+    /**
+     * поменять текст кнопки
+     *
+     * @param needMode режим кнопки
+     */
+    public void changeText(int needMode) {
+        if (needMode != mode) {
+            final String a = text;
+            text = secondText; secondText = a; mode = mode % 2 + 1;
+        }
     }
 }

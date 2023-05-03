@@ -113,4 +113,11 @@ public class Rectangle {
         ans.add(pointA); ans.add(pointB); ans.add(pointC); ans.add(pointD);
         return ans;
     }
+    /**
+     * получить нулевой прямоугольник
+     */
+    public static Rectangle nullRectangle() {
+        return new Rectangle(new Vector2d(0, 0), new Vector2d(0, 0), new Vector2d(0, 0), new Vector2d(0, 0),
+                new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)));
+    }
 }

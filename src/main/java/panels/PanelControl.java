@@ -26,10 +26,6 @@ public class PanelControl extends GridPanel {
      */
     MultiLineLabel task;
     /**
-     * Кнопка "решить"
-     */
-    private final Button solve;
-    /**
      * Заголовки
      */
     public List<Label> labels;
@@ -41,15 +37,10 @@ public class PanelControl extends GridPanel {
      * Кнопки
      */
     public List<Button> buttons;
-
     /**
-     * Сброс решения задачи
+     * Кнопка решить
      */
-    private void cancelTask() {
-        PanelRendering.task.cancel();
-        // Задаём новый текст кнопке решения
-        solve.text = "Решить";
-    }
+    public static Button solve;
 
     /**
      * Панель управления
@@ -96,22 +87,22 @@ public class PanelControl extends GridPanel {
                 6, 7, 4, 2, 2, 1, "0.0", true,
                 FIELD_TEXT_COLOR, true);
         inputs.add(yField);
-        Button addToFirstSet = new Button(
+        Button addToSet = new Button(
                 window, false, backgroundColor, PANEL_PADDING,
                 6, 7, 0, 3, 3, 1, "Добавить",
                 true, true);
-        addToFirstSet.setOnClick(() -> {
+        addToSet.setOnClick(() -> {
             // если числа введены верно
             if (!xField.hasValidDoubleValue()) {
                 PanelLog.warning("X координата введена неверно");
             } else if (!yField.hasValidDoubleValue())
                 PanelLog.warning("Y координата введена неверно");
             else
-                PanelRendering.task.addPoint(
+                PanelRendering.task.add(
                         new Vector2d(xField.doubleValue(), yField.doubleValue())
                 );
         });
-        buttons.add(addToFirstSet);
+        buttons.add(addToSet);
 
         // случайное добавление
         Label cntLabel = new Label(window, false, backgroundColor, PANEL_PADDING,
@@ -119,20 +110,20 @@ public class PanelControl extends GridPanel {
         labels.add(cntLabel);
 
         Input cntField = InputFactory.getInput(window, false, FIELD_BACKGROUND_COLOR, PANEL_PADDING,
-                6, 7, 1, 4, 2, 1, "5", true,
+                6, 7, 1, 4, 2, 1, "2", true,
                 FIELD_TEXT_COLOR, true);
         inputs.add(cntField);
 
         Button addPoints = new Button(
                 window, false, backgroundColor, PANEL_PADDING,
-                6, 7, 3, 4, 3, 1, "Добавить\nслучайные точки",
+                6, 7, 3, 4, 3, 1, "Добавить\nслучайные прямоугольники",
                 true, true);
         addPoints.setOnClick(() -> {
             // если числа введены верно
             if (!cntField.hasValidIntValue()) {
                 PanelLog.warning("кол-во точек указано неверно");
             } else
-                PanelRendering.task.addRandomPoints(cntField.intValue());
+                PanelRendering.task.addRandom(cntField.intValue());
         });
         buttons.add(addPoints);
         // управление
@@ -142,7 +133,7 @@ public class PanelControl extends GridPanel {
                 true, true);
         load.setOnClick(() -> {
             PanelRendering.load();
-            cancelTask();
+            PanelRendering.task.cancel();
         });
         buttons.add(load);
 
@@ -163,17 +154,22 @@ public class PanelControl extends GridPanel {
         solve = new Button(
                 window, false, backgroundColor, PANEL_PADDING,
                 6, 7, 3, 6, 3, 1, "Решить",
-                true, true);
+                true, true, 1, "Сбросить");
         solve.setOnClick(() -> {
             if (!PanelRendering.task.isSolved()) {
                 PanelRendering.task.solve();
-                String s = "Задача решена\n";// +
+                //String s = "Задача решена\n";// +
                         //"Пара прямоугольников: " + PanelRendering.task.getIntersRect() + "\n" +
                         //"Площадь: " + PanelRendering.task.getAreaIntersRect();
+                String s = "Вызов решения";
                 PanelLog.success(s);
-                solve.text = "Сбросить";
+
+                solve.changeText(2);
             } else {
-                cancelTask();
+                String s = "Вызов отмены решения через кнопку";
+                solve.changeText(1);
+                PanelLog.success(s);
+                PanelRendering.task.cancel();
             }
             window.requestFrame();
         });

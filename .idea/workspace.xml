@@ -4,12 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="fixed deselection from lines, little script fixed">
+    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="add hatching (to work normally); fix isInterLines, getInterLines in Line">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Application.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/app/Line.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Line.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Rectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelRendering.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelRendering.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/controls/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controls/Button.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelControl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelHelp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelHelp.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,20 +38,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;H:/My Project&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "full.screen.before.presentation.mode": "false",
+    "last_opened_file_path": "H:/My Project",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.editor"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="app" />
@@ -132,7 +134,8 @@
       <workItem from="1682690241234" duration="15788000" />
       <workItem from="1682750599541" duration="5158000" />
       <workItem from="1682883963114" duration="1698000" />
-      <workItem from="1682937011944" duration="10026000" />
+      <workItem from="1682937011944" duration="16732000" />
+      <workItem from="1683127039275" duration="5885000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1677913399113</created>
@@ -414,7 +417,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682752736989</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="add hatching (to work normally); fix isInterLines, getInterLines in Line">
+      <created>1682947897294</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1682947897294</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -432,7 +442,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="adaptive layout" />
     <MESSAGE value="4 panels" />
     <MESSAGE value="float cs" />
     <MESSAGE value="task rendering works" />
@@ -457,6 +466,7 @@
     <MESSAGE value="redefinition points, init lines, drawing lines, drawing rectangles work" />
     <MESSAGE value="Rectangle class - done, Line class fixed, Point class fixed, add function finding intersection figure (function work correctly), add function sorting points in array (function work correctly), add function finding the area of intersection (function work correctly), function solve working (function work correctly), add hide/show graph of fps, fixed tests (still not working), point and lines selection work" />
     <MESSAGE value="fixed deselection from lines, little script fixed" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed deselection from lines, little script fixed" />
+    <MESSAGE value="add hatching (to work normally); fix isInterLines, getInterLines in Line" />
+    <option name="LAST_COMMIT_MESSAGE" value="add hatching (to work normally); fix isInterLines, getInterLines in Line" />
   </component>
 </project>

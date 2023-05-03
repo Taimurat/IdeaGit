@@ -7,11 +7,24 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.github.humbleui.skija.*;
 import lombok.Getter;
 import misc.*;
+import panels.PanelControl;
 import panels.PanelLog;
+import panels.PanelRendering;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static app.Colors.*;
+
+/**
+ *  Глобальные проблемы:
+ *
+ *  1. Добавить рисование штриховки в случае сторон, параллельных OY
+ *
+ *  2. Что-то сделать при начале добавление ручного ввода, а потом по случайным значениям (они некорректно добавляются)
+ *
+ *
+ */
 
 /**
  * Класс задачи
@@ -87,13 +100,13 @@ public class Task {
     @JsonIgnore
     private Line FIRST_LINE;
     /**
-     * Список точек в пересечении
+     * Первый прямоугольник ответа
      */
     @Getter
     @JsonIgnore
     private Rectangle ansRectF;
     /**
-     * Список точек в разности
+     * Второй прямоугольник ответа
      */
     @Getter
     @JsonIgnore
@@ -129,10 +142,8 @@ public class Task {
         this.ownCS = ownCS;
         this.points = points;
         this.lines = lines;
-        this.ansRectF = new Rectangle(new Vector2d(0, 0), new Vector2d(0, 0), new Vector2d(0, 0), new Vector2d(0, 0),
-                new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)));
-        this.ansRectS = new Rectangle(new Vector2d(0, 0), new Vector2d(0, 0), new Vector2d(0, 0), new Vector2d(0, 0),
-                new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)));
+        this.ansRectF = Rectangle.nullRectangle();
+        this.ansRectS = Rectangle.nullRectangle();
         this.rectangles = rectangles;
         this.hatchingLines = hatchingLines;
     }
@@ -216,6 +227,12 @@ public class Task {
         // получаем положение на экране
         Vector2d taskPos = ownCS.getCoords(pos, lastWindowCS);
         // добавляем, исходя из того, какая по счёта опорная точка
+        add(taskPos);
+    }
+    /**
+     * добавить точку с рисованием остального
+     */
+    public void add(Vector2d taskPos) {
         if (COUNT_POINT_CREATING_RECT == 1) {
             addPoint(taskPos);
             FIRST_POINT = taskPos;
@@ -266,7 +283,7 @@ public class Task {
      * @param pos положение
      */
     public void addPoint(Vector2d pos) {
-        solved = false;
+        cancel();
         Point newPoint = new Point(pos);
         points.add(newPoint);
         // Добавляем в лог запись информации
@@ -279,7 +296,6 @@ public class Task {
      * @param pos положение
      */
     public void addPointInter(Vector2d pos) {
-        solved = false;
         Point newPoint = new Point(pos);
         newPoint.intersect();
         points.add(newPoint);
@@ -291,7 +307,6 @@ public class Task {
      * добавить пересечения отрезок
      */
     public void addLineInter(Vector2d first, Vector2d second) {
-        solved = false;
         Line newLine = new Line(first, second);
         newLine.addToAns();
         lines.add(newLine);
@@ -313,7 +328,7 @@ public class Task {
      *
      * @param cnt кол-во случайных точек
      */
-    public void addRandomPoints(int cnt) {
+    public void addRandom(int cnt) {
         // если создавать точки с полностью случайными координатами,
         // то вероятность того, что они совпадут крайне мала
         // поэтому нужно создать вспомогательную малую целочисленную ОСК
@@ -325,12 +340,14 @@ public class Task {
 
         // повторяем заданное количество раз
         for (int i = 0; i < cnt; i++) {
-            // получаем случайные координаты на решётке
-            Vector2i gridPos = addGrid.getRandomCoords();
-            // получаем координаты в СК задачи
-            Vector2d pos = ownCS.getCoords(gridPos, addGrid);
-            // сработает примерно в половине случаев
-            addPoint(pos);
+            for (int j = 0; j < 3; j++) {
+                // получаем случайные координаты на решётке
+                Vector2i gridPos = addGrid.getRandomCoords();
+                // получаем координаты в СК задачи
+                Vector2d taskPos = ownCS.getCoords(gridPos, addGrid);
+                // сработает примерно в половине случаев
+                add(taskPos);
+            }
         }
     }
 
@@ -338,7 +355,7 @@ public class Task {
      * Добавить отрезок
      */
     public void addLine(Vector2d fps, Vector2d sps) {
-        solved = false;
+        cancel();
         Line newLine = new Line(fps, sps);
         lines.add(newLine);
         // Добавляем в лог запись информации
@@ -349,7 +366,7 @@ public class Task {
      * Добавить прямоугольник
      */
     public void addRectangle(Vector2d A, Vector2d B, Vector2d C, Vector2d D, Line AB, Line BC, Line CD, Line DA) {
-        solved = false;
+        cancel();
         Rectangle newRectangle = new Rectangle(A, B, C, D, AB, BC, CD, DA);
         rectangles.add(newRectangle);
         // Добавляем в лог запись информации
@@ -474,6 +491,9 @@ public class Task {
         hatchingLines.clear();
         COUNT_POINT_CREATING_RECT = 1;
         solved = false;
+        ansRectF = Rectangle.nullRectangle();
+        ansRectS = Rectangle.nullRectangle();
+        PanelControl.solve.changeText(1);
     }
 
     /**
@@ -481,10 +501,7 @@ public class Task {
      */
     public void solve() {
 
-        for (Line l : lines) {
-            l.RemoveFromAns();
-            hatchingLines.clear();
-        }
+        cancel();
 
         double sMax = 0;
         // перебираем пары прямоугольников
@@ -541,6 +558,13 @@ public class Task {
      * Отмена решения задачи
      */
     public void cancel() {
+        for (Line l : lines) {
+            l.RemoveFromAns();
+            hatchingLines.clear();
+        }
+        String s = "Вызов отмены решения через функцию";
+        PanelLog.success(s);
+        PanelControl.solve.changeText(1);
         solved = false;
     }
 
