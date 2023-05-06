@@ -9,20 +9,29 @@ import lombok.Getter;
 import misc.*;
 import panels.PanelControl;
 import panels.PanelLog;
-import panels.PanelRendering;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import static app.Colors.*;
 
 /**
- *  Глобальные проблемы:
  *
- *  1. Добавить рисование штриховки в случае сторон, параллельных OY
- *
- *  2. Что-то сделать при начале добавление ручного ввода, а потом по случайным значениям (они некорректно добавляются)
- *
+ * ⣿⣿⣿⣿⣻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+ * ⣿⣿⣿⣵⣿⣿⣿⠿⡟⣛⣧⣿⣯⣿⣝⡻⢿⣿⣿⣿⣿⣿⣿⣿
+ * ⣿⣿⣿⣿⣿⠋⠁⣴⣶⣿⣿⣿⣿⣿⣿⣿⣦⣍⢿⣿⣿⣿⣿⣿
+ * ⣿⣿⣿⣿⢷⠄⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣏⢼⣿⣿⣿⣿
+ * ⢹⣿⣿⢻⠎⠔⣛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⣿⣿⣿⣿
+ * ⢸⣿⣿⠇⡶⠄⣿⣿⠿⠟⡛⠛⠻⣿⡿⠿⠿⣿⣗⢣⣿⣿⣿⣿
+ * ⠐⣿⣿⡿⣷⣾⣿⣿⣿⣾⣶⣶⣶⣿⣁⣔⣤⣀⣼⢲⣿⣿⣿⣿
+ * ⠄⣿⣿⣿⣿⣾⣟⣿⣿⣿⣿⣿⣿⣿⡿⣿⣿⣿⢟⣾⣿⣿⣿⣿
+ * ⠄⣟⣿⣿⣿⡷⣿⣿⣿⣿⣿⣮⣽⠛⢻⣽⣿⡇⣾⣿⣿⣿⣿⣿
+ * ⠄⢻⣿⣿⣿⡷⠻⢻⡻⣯⣝⢿⣟⣛⣛⣛⠝⢻⣿⣿⣿⣿⣿⣿
+ * ⠄⠸⣿⣿⡟⣹⣦⠄⠋⠻⢿⣶⣶⣶⡾⠃⡂⢾⣿⣿⣿⣿⣿⣿
+ * ⠄⠄⠟⠋⠄⢻⣿⣧⣲⡀⡀⠄⠉⠱⣠⣾⡇⠄⠉⠛⢿⣿⣿⣿
+ * ⠄⠄⠄⠄⠄⠈⣿⣿⣿⣷⣿⣿⢾⣾⣿⣿⣇⠄⠄⠄⠄⠄⠉⠉
+ * ⠄⠄⠄⠄⠄⠄⠸⣿⣿⠟⠃⠄⠄⢈⣻⣿⣿⠄⠄⠄⠄⠄⠄⠄
+ * ⠄⠄⠄⠄⠄⠄⠄⢿⣿⣾⣷⡄⠄⢾⣿⣿⣿⡄⠄⠄⠄⠄⠄⠄
+ * ⠄⠄⠄⠄⠄⠄⠄⠸⣿⣿⣿⠃⠄⠈⢿⣿⣿⠄⠄⠄⠄⠄⠄⠄
  *
  */
 
@@ -78,37 +87,27 @@ public class Task {
     /**
      * Какая опорная точка вводится
      */
-    @Getter
-    @JsonIgnore
     private int COUNT_POINT_CREATING_RECT = 1;
     /**
      * Первая опорная точка
      */
-    @Getter
-    @JsonIgnore
     private Vector2d FIRST_POINT;
     /**
      * Вторая опорная точка
      */
-    @Getter
-    @JsonIgnore
     private Vector2d SECOND_POINT;
     /**
      * Опорный отрезок
      */
-    @Getter
-    @JsonIgnore
     private Line FIRST_LINE;
     /**
      * Первый прямоугольник ответа
      */
-    @Getter
     @JsonIgnore
     private Rectangle ansRectF;
     /**
      * Второй прямоугольник ответа
      */
-    @Getter
     @JsonIgnore
     private Rectangle ansRectS;
     /**
@@ -233,48 +232,86 @@ public class Task {
      * добавить точку с рисованием остального
      */
     public void add(Vector2d taskPos) {
-        if (COUNT_POINT_CREATING_RECT == 1) {
-            addPoint(taskPos);
-            FIRST_POINT = taskPos;
-            COUNT_POINT_CREATING_RECT = 2;
-        } else if (COUNT_POINT_CREATING_RECT == 2) {
-            addPoint(taskPos);
-            SECOND_POINT = taskPos;
-            COUNT_POINT_CREATING_RECT = 3;
-            addLine(FIRST_POINT, SECOND_POINT);
-            FIRST_LINE = new Line(FIRST_POINT, SECOND_POINT);
-        } else {
-            addPoint(taskPos);
-            // рассчитываем расстояние от прямой до точки
-            double dist = FIRST_LINE.getDistance(taskPos);
-            // рассчитываем векторы для векторного умножения
-            Vector2d AB = Vector2d.subtract(SECOND_POINT, FIRST_POINT);
-            Vector2d AP = Vector2d.subtract(taskPos, FIRST_POINT);
-            // определяем направление смещения
-            double direction = Math.signum(AB.cross(AP));
-            // получаем вектор смещения
-            Vector2d offset = AB.rotated(Math.PI / 2 * direction).norm().mult(dist);
+            if (COUNT_POINT_CREATING_RECT == 1) {
+                addPoint(taskPos);
+                FIRST_POINT = taskPos;
+                COUNT_POINT_CREATING_RECT = 2;
+            } else if (COUNT_POINT_CREATING_RECT == 2) {
+                addPoint(taskPos);
+                SECOND_POINT = taskPos;
+                COUNT_POINT_CREATING_RECT = 3;
+                addLine(FIRST_POINT, SECOND_POINT);
+                FIRST_LINE = new Line(FIRST_POINT, SECOND_POINT);
+            } else {
+                addPoint(taskPos);
+                // рассчитываем расстояние от прямой до точки
+                double dist = FIRST_LINE.getDistance(taskPos);
+                // рассчитываем векторы для векторного умножения
+                Vector2d AB = Vector2d.subtract(SECOND_POINT, FIRST_POINT);
+                Vector2d AP = Vector2d.subtract(taskPos, FIRST_POINT);
+                // определяем направление смещения
+                double direction = Math.signum(AB.cross(AP));
+                // получаем вектор смещения
+                Vector2d offset = AB.rotated(Math.PI / 2 * direction).norm().mult(dist);
 
-            // находим координаты вторых двух вершин прямоугольника
-            Vector2d pointC = Vector2d.sum(SECOND_POINT, offset);
-            addPoint(pointC);
-            Vector2d pointD = Vector2d.sum(FIRST_POINT, offset);
-            addPoint(pointD);
+                // находим координаты вторых двух вершин прямоугольника
+                Vector2d pointC = Vector2d.sum(SECOND_POINT, offset);
+                addPoint(pointC);
+                Vector2d pointD = Vector2d.sum(FIRST_POINT, offset);
+                addPoint(pointD);
 
-            // рисуем его стороны
-            Line BC = new Line(SECOND_POINT, pointC);
-            addLine(SECOND_POINT, pointC);
-            Line CD = new Line(pointC, pointD);
-            addLine(pointC, pointD);
-            Line DA = new Line(pointD, FIRST_POINT);
-            addLine(pointD, FIRST_POINT);
-            COUNT_POINT_CREATING_RECT = 1;
+                // рисуем его стороны
+                Line BC = new Line(SECOND_POINT, pointC);
+                addLine(SECOND_POINT, pointC);
+                Line CD = new Line(pointC, pointD);
+                addLine(pointC, pointD);
+                Line DA = new Line(pointD, FIRST_POINT);
+                addLine(pointD, FIRST_POINT);
+                COUNT_POINT_CREATING_RECT = 1;
 
-            // создаём
+                // создаём
 
-            addRectangle(FIRST_POINT, SECOND_POINT, pointC, pointD,
-                    FIRST_LINE, BC, CD, DA);
-        }
+                addRectangle(FIRST_POINT, SECOND_POINT, pointC, pointD,
+                        FIRST_LINE, BC, CD, DA);
+            }
+    }
+    /**
+     * Добавить случайный прямоугольник
+     */
+    public void addRandomRect(Vector2d taskPosF, Vector2d taskPosS, Vector2d taskPosT) {
+        addPoint(taskPosF);
+        addPoint(taskPosS);
+        addLine(taskPosF, taskPosS);
+        Line first_line = new Line(taskPosF, taskPosS);
+        addPoint(taskPosT);
+        // рассчитываем расстояние от прямой до точки
+        double dist = first_line.getDistance(taskPosT);
+        // рассчитываем векторы для векторного умножения
+        Vector2d AB = Vector2d.subtract(taskPosS, taskPosF);
+        Vector2d AP = Vector2d.subtract(taskPosT, taskPosF);
+        // определяем направление смещения
+        double direction = Math.signum(AB.cross(AP));
+        // получаем вектор смещения
+        Vector2d offset = AB.rotated(Math.PI / 2 * direction).norm().mult(dist);
+
+        // находим координаты вторых двух вершин прямоугольника
+        Vector2d pointC = Vector2d.sum(taskPosS, offset);
+        addPoint(pointC);
+        Vector2d pointD = Vector2d.sum(taskPosF, offset);
+        addPoint(pointD);
+
+        // рисуем его стороны
+        Line BC = new Line(taskPosS, pointC);
+        addLine(taskPosS, pointC);
+        Line CD = new Line(pointC, pointD);
+        addLine(pointC, pointD);
+        Line DA = new Line(pointD, taskPosF);
+        addLine(pointD, taskPosF);
+
+        // создаём
+
+        addRectangle(taskPosF, taskPosS, pointC, pointD,
+                first_line, BC, CD, DA);
     }
 
     /**
@@ -297,7 +334,7 @@ public class Task {
      */
     public void addPointInter(Vector2d pos) {
         Point newPoint = new Point(pos);
-        newPoint.intersect();
+        newPoint.addToAns();
         points.add(newPoint);
         // Добавляем в лог запись информации
         PanelLog.info("точка " + newPoint + " создана");
@@ -320,7 +357,7 @@ public class Task {
         Line newLine = new Line(first, second);
         newLine.addToAns();
         hatchingLines.add(newLine);
-        PanelLog.info("отрезок штриховки " + newLine + " создан");
+        //PanelLog.info("отрезок штриховки " + newLine + " создан");
     }
 
     /**
@@ -340,14 +377,16 @@ public class Task {
 
         // повторяем заданное количество раз
         for (int i = 0; i < cnt; i++) {
-            for (int j = 0; j < 3; j++) {
-                // получаем случайные координаты на решётке
-                Vector2i gridPos = addGrid.getRandomCoords();
-                // получаем координаты в СК задачи
-                Vector2d taskPos = ownCS.getCoords(gridPos, addGrid);
-                // сработает примерно в половине случаев
-                add(taskPos);
-            }
+            // получаем случайные координаты на решётке
+            Vector2i gridPosF = addGrid.getRandomCoords();
+            Vector2i gridPosS = addGrid.getRandomCoords();
+            Vector2i gridPosT = addGrid.getRandomCoords();
+            // получаем координаты в СК задачи
+            Vector2d taskPosF = ownCS.getCoords(gridPosF, addGrid);
+            Vector2d taskPosS = ownCS.getCoords(gridPosS, addGrid);
+            Vector2d taskPosT = ownCS.getCoords(gridPosT, addGrid);
+            // сработает примерно в половине случаев
+            addRandomRect(taskPosF, taskPosS, taskPosT);
         }
     }
 
@@ -416,29 +455,35 @@ public class Task {
     /**
      * нахождение фигуры пересечения
      */
-    public ArrayList<Vector2d> getIntersRect(Rectangle first, Rectangle second) {
+    public ArrayList<Vector2d> getIntersRect(Rectangle first, Rectangle second, int mode) {
         ArrayList<Vector2d> ans = new ArrayList<>();
-        for (Line lineF : first.getlistlines()) {
-            for (Line lineS : second.getlistlines()) {
+        for (Line lineF : first.getListLines()) {
+            for (Line lineS : second.getListLines()) {
                 if (lineF.isIntersLines(lineS) && lineF.getIntersLines(lineS).isBelongSegment(lineF, lineS)) {
                     ans.add(lineF.getIntersLines(lineS));
-                    PanelLog.info("Точка пересечения " + lineF.getIntersLines(lineS) + " обработана\n");
-                    addPoint(lineF.getIntersLines(lineS));
+                    if (mode == 1) {
+                        PanelLog.info("Точка пересечения " + lineF.getIntersLines(lineS) + " обработана\n");
+                        addPoint(lineF.getIntersLines(lineS));
+                    }
                 }
             }
         }
-        for (Vector2d point : first.getlistpoints()) {
+        for (Vector2d point : first.getListPoints()) {
             if (point.isIntersRect(second)) {
                 ans.add(point);
-                PanelLog.info("Точка объединения " + point + " обработана\n");
-                addPoint(point);
+                if (mode == 1) {
+                    PanelLog.info("Точка объединения " + point + " обработана\n");
+                    addPoint(point);
+                }
             }
         }
-        for (Vector2d point : second.getlistpoints()) {
+        for (Vector2d point : second.getListPoints()) {
             if (point.isIntersRect(first)) {
                 ans.add(point);
-                PanelLog.info("Точка объединения " + point + " обработана\n");
-                addPoint(point);
+                if (mode == 1) {
+                    PanelLog.info("Точка объединения " + point + " обработана\n");
+                    addPoint(point);
+                }
             }
         }
         PanelLog.info("индексировано пересечение " + ans);
@@ -448,9 +493,9 @@ public class Task {
     /**
      * нахождение площади пересечения
      */
-    public double getAreaIntersRect(Rectangle first, Rectangle second) {
+    public double getAreaIntersRect(Rectangle first, Rectangle second, int mode) {
         double s = 0;
-        ArrayList<Vector2d> intersection = getIntersRect(first, second);
+        ArrayList<Vector2d> intersection = getIntersRect(first, second, mode);
         if (intersection.size() != 0) {
             intersection.add(intersection.get(0));
             //Вычисление площади пересечения по методу Гаусса
@@ -507,7 +552,7 @@ public class Task {
         // перебираем пары прямоугольников
         for (int i = 0; i < rectangles.size() - 1; i++) {
             for (int j = i + 1; j < rectangles.size(); j++) {
-                double s = getAreaIntersRect(rectangles.get(i), rectangles.get(j));
+                double s = getAreaIntersRect(rectangles.get(i), rectangles.get(j), 1);
                 if (s > sMax) {
                     sMax = s;
                     ansRectF = rectangles.get(i);
@@ -515,10 +560,23 @@ public class Task {
                 }
             }
         }
-        ArrayList<Vector2d> ans = sortForCF(getIntersRect(ansRectF, ansRectS));
+        ArrayList<Vector2d> ans = sortForCF(getIntersRect(ansRectF, ansRectS, 1));
         if (ans.size() != 0) {
             ans.add(ans.get(0));
+
             // выделяем пару
+            for (int i = 0; i < 4; i++) { addPointInter(ansRectF.getListPoints().get(i)); }
+            addLineInter(ansRectF.pointA, ansRectF.pointB);
+            addLineInter(ansRectF.pointB, ansRectF.pointC);
+            addLineInter(ansRectF.pointC, ansRectF.pointD);
+            addLineInter(ansRectF.pointD, ansRectF.pointA);
+
+            for (int i = 0; i < 4; i++) { addPointInter(ansRectS.getListPoints().get(i)); }
+            addLineInter(ansRectS.pointA, ansRectS.pointB);
+            addLineInter(ansRectS.pointB, ansRectS.pointC);
+            addLineInter(ansRectS.pointC, ansRectS.pointD);
+            addLineInter(ansRectS.pointD, ansRectS.pointA);
+
             for (int i = 0; i < ans.size() - 1; i++) {
                 addPointInter(ans.get(i));
                 addLineInter(ans.get(i), ans.get(i + 1));
@@ -545,6 +603,7 @@ public class Task {
                 }
 
             }
+            PanelLog.info("Ответ показан на экране. Площадь такого пересечения " + getAreaIntersRect(ansRectF, ansRectS, 2));
 
         } else {
             PanelLog.info("Пересечений прямоугольников нет\n");
@@ -555,15 +614,39 @@ public class Task {
     }
 
     /**
+     * Решить задачу, функция ДЛЯ ТЕСТОВ
+     */
+    public ArrayList<Vector2d> solve1() {
+
+        double sMax = 0; Rectangle ansRectF = Rectangle.nullRectangle(); Rectangle ansRectS = Rectangle.nullRectangle();
+        // перебираем пары прямоугольников
+        for (int i = 0; i < rectangles.size() - 1; i++) {
+            for (int j = i + 1; j < rectangles.size(); j++) {
+                double s = getAreaIntersRect(rectangles.get(i), rectangles.get(j), 2);
+                if (s > sMax) {
+                    sMax = s;
+                    ansRectF = rectangles.get(i);
+                    ansRectS = rectangles.get(j);
+                }
+            }
+        }
+        ArrayList<Vector2d> ans = sortForCF(getIntersRect(ansRectF, ansRectS, 2));
+        return ans;
+    }
+
+    /**
      * Отмена решения задачи
      */
     public void cancel() {
         for (Line l : lines) {
             l.RemoveFromAns();
-            hatchingLines.clear();
         }
-        String s = "Вызов отмены решения через функцию";
-        PanelLog.success(s);
+        for (Point p : points) {
+            p.RemoveFromAns();
+        }
+        hatchingLines.clear();
+        //String s = "Вызов отмены решения через функцию";
+        //PanelLog.success(s);
         PanelControl.solve.changeText(1);
         solved = false;
     }

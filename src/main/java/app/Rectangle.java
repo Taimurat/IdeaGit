@@ -2,6 +2,7 @@ package app;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import misc.Vector2d;
 
 import java.util.ArrayList;
@@ -56,8 +57,8 @@ public class Rectangle {
      * @param DA четвёртый отрезок
      */
     @JsonCreator
-    public Rectangle(Vector2d pointA, Vector2d pointB, Vector2d pointC, Vector2d pointD,
-                     Line AB, Line BC, Line CD, Line DA) {
+    public Rectangle(@JsonProperty("pointA") Vector2d pointA, @JsonProperty("pointB") Vector2d pointB, @JsonProperty("pointC") Vector2d pointC, @JsonProperty("pointD") Vector2d pointD,
+                     @JsonProperty("AB") Line AB, @JsonProperty("BC") Line BC, @JsonProperty("CD") Line CD, @JsonProperty("DA") Line DA) {
         this.pointA = pointA;
         this.pointB = pointB;
         this.pointC = pointC;
@@ -99,7 +100,7 @@ public class Rectangle {
      * получить список отрезков
      */
     @JsonIgnore
-    public ArrayList<Line> getlistlines() {
+    public ArrayList<Line> getListLines() {
         ArrayList<Line> ans = new ArrayList<>();
         ans.add(AB); ans.add(BC); ans.add(CD); ans.add(DA);
         return ans;
@@ -108,7 +109,7 @@ public class Rectangle {
      * получить список точек
      */
     @JsonIgnore
-    public ArrayList<Vector2d> getlistpoints() {
+    public ArrayList<Vector2d> getListPoints() {
         ArrayList<Vector2d> ans = new ArrayList<>();
         ans.add(pointA); ans.add(pointB); ans.add(pointC); ans.add(pointD);
         return ans;

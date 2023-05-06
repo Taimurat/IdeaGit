@@ -1,6 +1,8 @@
 package app;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import misc.Misc;
 import misc.Vector2d;
 import panels.PanelLog;
@@ -44,7 +46,7 @@ public class Line {
      * @param pointB вторая опорная точка
      */
     @JsonCreator
-    public Line(Vector2d pointA, Vector2d pointB) {
+    public Line(@JsonProperty("pointA") Vector2d pointA, @JsonProperty("pointB") Vector2d pointB) {
         this.pointA = pointA;
         this.pointB = pointB;
         this.isAns = false;
@@ -83,7 +85,7 @@ public class Line {
     }
 
     /**
-     * добавить к ответу
+     * убрать из ответа
      */
     public void RemoveFromAns() {
         isAns = false;
@@ -93,6 +95,7 @@ public class Line {
      *
      * @return цвет отрезка
      */
+    @JsonIgnore
     public int getColor() {
         return (isAns ? Misc.getColor(0xCC, 0x00, 0xFF, 0x00) : Misc.getColor(0xCC, 0xFF, 0xFF, 0xFF));
     }
@@ -100,14 +103,28 @@ public class Line {
      * пересекаются ли прямые
      */
     public boolean isIntersLines(Line other) {
-        return a / b != other.a / other.b;
+        if (b != 0 && other.b != 0) {
+            return a / b != other.a / other.b;
+        }
+        else if (b == 0 && other.b == 0) {
+            return a == other.a;
+        }
+        return true;
     }
     /**
      * получить пересечение прямых
      */
     public Vector2d getIntersLines(Line other) {
-        double x = (other.c * b - c * other.b) / (a * other.b - other.a * b);
-        return new Vector2d(x, - a * x / b - c / b);
+        if (b != 0 && other.b != 0) {
+            double x = (other.c * b - c * other.b) / (a * other.b - other.a * b);
+            return new Vector2d(x, -a * x / b - c / b);
+        }
+        else if (b == 0 && other.b != 0) {
+            double x = -c / a;
+            return new Vector2d(x, -other.a * x / other.b - other.c / other.b);
+        }
+        double x = -other.c / other.a;
+        return new Vector2d(x, -a * x / b - c / b);
     }
     /**
      * вспомогательный метод к нижнему
@@ -124,6 +141,7 @@ public class Line {
     }
     /**
      * получить пересечение отрезка и прямой через коэффиценты
+     *
      */
     public Vector2d getInterLines(double aOther, double bOther, double cOther) {
         double x;

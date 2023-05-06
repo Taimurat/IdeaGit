@@ -20,7 +20,7 @@ public class Point {
      * выделение
      */
     @JsonIgnore
-    public boolean isInters;
+    public boolean isAns;
 
     /**
      * Конструктор точки
@@ -30,7 +30,7 @@ public class Point {
     @JsonCreator
     public Point(@JsonProperty("pos") Vector2d pos) {
         this.pos = pos;
-        isInters = false;
+        isAns = false;
     }
 
     /**
@@ -69,13 +69,20 @@ public class Point {
      *
      * @return цвет точки
      */
+    @JsonIgnore
     public int getColor() {
-        return isInters ? Misc.getColor(0xCC, 0xF8, 0x3B, 0xBB) : Misc.getColor(0xCC, 0x00, 0xFF, 0x0);
+        return isAns ? Misc.getColor(0xCC, 0xF8, 0x3B, 0xBB) : Misc.getColor(0xCC, 0x00, 0xFF, 0x0);
     }
     /**
      * пометить точку
      */
-    public void intersect() {
-        isInters = true;
+    public void addToAns() {
+        isAns = true;
+    }
+    /**
+     * убрать из ответа
+     */
+    public void RemoveFromAns() {
+        isAns = false;
     }
 }

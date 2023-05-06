@@ -4,13 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="add hatching (to work normally); fix isInterLines, getInterLines in Line">
+    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="fixed FINALLY cancel button, fixed add random button (to work normally), fixed add from adding manually">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Line.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Line.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Point.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Rectangle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controls/Button.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controls/Button.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelControl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelControl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/panels/PanelHelp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/panels/PanelHelp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/conf.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/conf.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/UnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/UnitTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,24 +40,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "full.screen.before.presentation.mode": "false",
-    "last_opened_file_path": "H:/My Project",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.editor"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;H:/My Project&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="H:\My Project\src\test\java" />
+    </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="app" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
@@ -75,21 +83,31 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UnitTest.firstTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UnitTest.test6" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="My Project" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="UnitTest" />
-      <option name="METHOD_NAME" value="firstTest" />
+      <option name="METHOD_NAME" value="test6" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UnitTest.secondTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UnitTest.test7" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="My Project" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="UnitTest" />
-      <option name="METHOD_NAME" value="secondTest" />
+      <option name="METHOD_NAME" value="test7" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UnitTest.test8" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="My Project" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="UnitTest" />
+      <option name="METHOD_NAME" value="test8" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -99,8 +117,9 @@
       <list>
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.UnitTest" />
-        <item itemvalue="JUnit.UnitTest.secondTest" />
-        <item itemvalue="JUnit.UnitTest.firstTest" />
+        <item itemvalue="JUnit.UnitTest.test8" />
+        <item itemvalue="JUnit.UnitTest.test7" />
+        <item itemvalue="JUnit.UnitTest.test6" />
       </list>
     </recent_temporary>
   </component>
@@ -135,7 +154,12 @@
       <workItem from="1682750599541" duration="5158000" />
       <workItem from="1682883963114" duration="1698000" />
       <workItem from="1682937011944" duration="16732000" />
-      <workItem from="1683127039275" duration="5885000" />
+      <workItem from="1683127039275" duration="7262000" />
+      <workItem from="1683217560374" duration="3835000" />
+      <workItem from="1683277463428" duration="3194000" />
+      <workItem from="1683296638878" duration="6615000" />
+      <workItem from="1683304296844" duration="8822000" />
+      <workItem from="1683354508460" duration="394000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1677913399113</created>
@@ -424,7 +448,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682947897294</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="fixed FINALLY cancel button, fixed add random button (to work normally), fixed add from adding manually">
+      <created>1683133487101</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1683133487101</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -442,7 +473,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="4 panels" />
     <MESSAGE value="float cs" />
     <MESSAGE value="task rendering works" />
     <MESSAGE value="adding points works" />
@@ -467,6 +497,10 @@
     <MESSAGE value="Rectangle class - done, Line class fixed, Point class fixed, add function finding intersection figure (function work correctly), add function sorting points in array (function work correctly), add function finding the area of intersection (function work correctly), function solve working (function work correctly), add hide/show graph of fps, fixed tests (still not working), point and lines selection work" />
     <MESSAGE value="fixed deselection from lines, little script fixed" />
     <MESSAGE value="add hatching (to work normally); fix isInterLines, getInterLines in Line" />
-    <option name="LAST_COMMIT_MESSAGE" value="add hatching (to work normally); fix isInterLines, getInterLines in Line" />
+    <MESSAGE value="fixed FINALLY cancel button, fixed add random button (to work normally), fixed add from adding manually" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed FINALLY cancel button, fixed add random button (to work normally), fixed add from adding manually" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/My_Project$UnitTest.ic" NAME="UnitTest Coverage Results" MODIFIED="1683298916799" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

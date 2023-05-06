@@ -157,18 +157,18 @@ public class PanelControl extends GridPanel {
                 true, true, 1, "Сбросить");
         solve.setOnClick(() -> {
             if (!PanelRendering.task.isSolved()) {
+                String s = "Вызов решения";
+                PanelLog.success(s);
                 PanelRendering.task.solve();
                 //String s = "Задача решена\n";// +
                         //"Пара прямоугольников: " + PanelRendering.task.getIntersRect() + "\n" +
                         //"Площадь: " + PanelRendering.task.getAreaIntersRect();
-                String s = "Вызов решения";
-                PanelLog.success(s);
 
                 solve.changeText(2);
             } else {
-                String s = "Вызов отмены решения через кнопку";
+                //String s = "Вызов отмены решения через кнопку";
                 solve.changeText(1);
-                PanelLog.success(s);
+                //PanelLog.success(s);
                 PanelRendering.task.cancel();
             }
             window.requestFrame();
