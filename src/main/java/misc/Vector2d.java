@@ -234,6 +234,8 @@ public class Vector2d {
 
     /**
      * принадлежит ли точка прямоугольнику
+     *
+     * @return действительно, что же она возвращает?
      */
     public boolean isIntersRect(Rectangle rect) {
         double width = Math.sqrt((rect.pointB.x - rect.pointC.x) * (rect.pointB.x - rect.pointC.x) + (rect.pointB.y - rect.pointC.y) * (rect.pointB.y - rect.pointC.y));

@@ -7,8 +7,6 @@ import misc.Vector2d;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Класс тестирования
@@ -16,6 +14,9 @@ import java.util.Set;
 public class UnitTest {
 
 
+    /**
+     * Этот тест проверяет, правильно ли метод getIntersLines() находит пересечение прямых.
+     */
     @Test
     public void test1() {
 
@@ -28,6 +29,9 @@ public class UnitTest {
         assert Math.abs(i.x-1) < 0.001 && Math.abs(i.y-1) < 0.001;
     }
 
+    /**
+     * Этот тест проверяет, правильно ли метод getIntersLines() находит пересечение прямых.
+     */
     @Test
     public void test2() {
 
@@ -40,6 +44,9 @@ public class UnitTest {
         assert Math.abs(i.x-1.5) < 0.001 && Math.abs(i.y-1.5) < 0.001;
     }
 
+    /**
+     * Этот тест проверяет, правильно ли метод getDistance() находит расстояние от точки до прямой.
+     */
     @Test
     public void test3() {
 
@@ -53,6 +60,9 @@ public class UnitTest {
         assert Math.abs(x-2.1213) < 0.001;
     }
 
+    /**
+     * Этот тест проверяет, правильно ли метод getIntersLines() находит пересечение прямых.
+     */
     @Test
     public void test4() {
 
@@ -67,6 +77,9 @@ public class UnitTest {
         assert Math.abs(x.x - 2.2222) < 0.001 && Math.abs(x.y - 1.1111) < 0.001;
     }
 
+    /**
+     * Этот тест проверяет, правильно ли метод isIntersRect() определяет принадлежность точки к прямоугольнику.
+     */
     @Test
     public void test5() {
 
@@ -83,6 +96,9 @@ public class UnitTest {
         assert p.isIntersRect(rectangle);
     }
 
+    /**
+     * Этот тест проверяет, правильно ли метод isIntersRect() определяет принадлежность точки к прямоугольнику.
+     */
     @Test
     public void test6() {
 
@@ -100,6 +116,9 @@ public class UnitTest {
         assert p.isIntersRect(rect);
     }
 
+    /**
+     * Этот тест проверяет, правильно ли метод getAreaIntersRect() находит площадь пересечения прямоугольников.
+     */
     @Test
     public void test7() {
 
@@ -125,6 +144,9 @@ public class UnitTest {
         assert Math.abs(task.getAreaIntersRect(rectangle1, rectangle2, 2)- 4.98297) < 0.001;
     }
 
+    /**
+     * Этот тест проверяет, правильно ли решена задача.
+     */
     @Test
     public void test8() {
 

@@ -8,7 +8,7 @@ import misc.Vector2d;
 import java.util.ArrayList;
 
 /**
- * Класс линии
+ * Класс прямоугольника
  */
 public class Rectangle {
     /**
@@ -100,6 +100,8 @@ public class Rectangle {
     }
     /**
      * получить список отрезков
+     *
+     * @return собсна, список отрезков
      */
     @JsonIgnore
     public ArrayList<Line> getListLines() {
@@ -109,6 +111,8 @@ public class Rectangle {
     }
     /**
      * получить список точек
+     *
+     * @return список точек
      */
     @JsonIgnore
     public ArrayList<Vector2d> getListPoints() {
@@ -118,6 +122,8 @@ public class Rectangle {
     }
     /**
      * получить нулевой прямоугольник
+     *
+     * @return НУЛЕВОЙ прямоугольник (да, такой существует)
      */
     public static Rectangle nullRectangle() {
         return new Rectangle(new Vector2d(0, 0), new Vector2d(0, 0),

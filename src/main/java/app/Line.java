@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import misc.Misc;
 import misc.Vector2d;
-import panels.PanelLog;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;
@@ -105,6 +104,8 @@ public class Line {
     }
     /**
      * пересекаются ли прямые
+     *
+     * @param other линия другая
      */
     public boolean isIntersLines(Line other) {
         if (b != 0 && other.b != 0) {
@@ -117,6 +118,8 @@ public class Line {
     }
     /**
      * получить пересечение прямых
+     *
+     * @param other линия другая
      */
     public Vector2d getIntersLines(Line other) {
         if (b != 0 && other.b != 0) {
@@ -148,6 +151,11 @@ public class Line {
     /**
      * получить пересечение отрезка и прямой через коэффиценты
      *
+     * @param aOther коэф а другой прямой
+     * @param bOther коэф b другой прямой
+     * @param cOther коэф с другой прямой
+     *
+     * @return точка пересечения (тип вектор2д)
      */
     public Vector2d getInterLines(double aOther, double bOther, double cOther) {
         double x;

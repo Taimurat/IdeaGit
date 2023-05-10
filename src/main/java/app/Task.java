@@ -233,16 +233,19 @@ public class Task {
      */
     public void add(Vector2d taskPos) {
             if (COUNT_POINT_CREATING_RECT == 1) {
+                // создание 1 опорной точки
                 addPoint(taskPos);
                 FIRST_POINT = taskPos;
                 COUNT_POINT_CREATING_RECT = 2;
             } else if (COUNT_POINT_CREATING_RECT == 2) {
+                // создание 2 опорной точки и опорного отрезка
                 addPoint(taskPos);
                 SECOND_POINT = taskPos;
                 COUNT_POINT_CREATING_RECT = 3;
                 addLine(FIRST_POINT, SECOND_POINT);
                 FIRST_LINE = new Line(FIRST_POINT, SECOND_POINT);
             } else {
+                // создание 3 опорной точки и прямоугольника
                 addPoint(taskPos);
                 // рассчитываем расстояние от прямой до точки
                 double dist = FIRST_LINE.getDistance(taskPos);
@@ -347,6 +350,7 @@ public class Task {
         Line newLine = new Line(first, second);
         newLine.addToAns();
         lines.add(newLine);
+        // Добавляем в лог запись информации
         PanelLog.info("отрезок " + newLine + " создан");
     }
 
@@ -357,7 +361,6 @@ public class Task {
         Line newLine = new Line(first, second);
         newLine.addToAns();
         hatchingLines.add(newLine);
-        //PanelLog.info("отрезок штриховки " + newLine + " создан");
     }
 
     /**
@@ -421,6 +424,7 @@ public class Task {
     public ArrayList<Vector2d> sortForCF(ArrayList<Vector2d> mass) {
         ArrayList<Vector2d> ans = new ArrayList<>();
         if (mass.size() != 0) {
+            // находим самую левую точку
             Vector2d first = mass.get(0);
             for (Vector2d point : mass) {
                 if (point.x < first.x ||
@@ -430,6 +434,7 @@ public class Task {
             }
             ans.add(first);
             mass.remove(first);
+            // сортируем точки
             while (mass.size() != 0) {
                 Vector2d Point = mass.get(0);
                 for (Vector2d point : mass) {
@@ -456,9 +461,16 @@ public class Task {
 
     /**
      * нахождение фигуры пересечения
+     *
+     * @param first первый прямоугольник
+     * @param second второй прямоугольник
+     * @param mode рабочий режим (1) или режим тестов (2)
+     *
+     * @return массив точек - фигура пересечения
      */
     public ArrayList<Vector2d> getIntersRect(Rectangle first, Rectangle second, int mode) {
         ArrayList<Vector2d> ans = new ArrayList<>();
+        // ищем все точки "пересечения"
         for (Line lineF : first.getListLines()) {
             for (Line lineS : second.getListLines()) {
                 if (lineF.isIntersLines(lineS) &&
@@ -472,6 +484,7 @@ public class Task {
                 }
             }
         }
+        // ищем все точки "объединения"
         for (Vector2d point : first.getListPoints()) {
             if (point.isIntersRect(second)) {
                 ans.add(point);
@@ -481,6 +494,7 @@ public class Task {
                 }
             }
         }
+        // ищем все точки "объединения"
         for (Vector2d point : second.getListPoints()) {
             if (point.isIntersRect(first)) {
                 ans.add(point);
@@ -491,11 +505,18 @@ public class Task {
             }
         }
         PanelLog.info("индексировано пересечение " + ans);
+        // возвращаем предварительно отсортированный список точек
         return sortForCF(ans);
     }
 
     /**
      * нахождение площади пересечения
+     *
+     * @param first первый прямоугольник
+     * @param second второй прямоугольник
+     * @param mode рабочий режим (1) или режим тестов (2)
+     *
+     * @return площадь пересечения
      */
     public double getAreaIntersRect(Rectangle first, Rectangle second, int mode) {
         double s = 0;
@@ -504,7 +525,8 @@ public class Task {
             intersection.add(intersection.get(0));
             //Вычисление площади пересечения по методу Гаусса
             for (int i = 0; i < intersection.size() - 1; i++) {
-                s += intersection.get(i).x * -intersection.get(i + 1).y - intersection.get(i + 1).x * -intersection.get(i).y;
+                s += intersection.get(i).x * -intersection.get(i + 1).y
+                        - intersection.get(i + 1).x * -intersection.get(i).y;
             }
         }
 
