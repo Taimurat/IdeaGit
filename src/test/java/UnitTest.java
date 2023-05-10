@@ -73,9 +73,12 @@ public class UnitTest {
 
 
         Vector2d p = new Vector2d(0, 0);
-        Rectangle rectangle = new Rectangle(new Vector2d(-2, -1), new Vector2d(-2, 3), new Vector2d(5, 3), new Vector2d(5, -1),
-                new Line(new Vector2d(-2, -1), new Vector2d(-2, 3)), new Line(new Vector2d(-2, 3), new Vector2d(5, 3)),
-                new Line(new Vector2d(5, 3), new Vector2d(5, -1)), new Line(new Vector2d(5, -1), new Vector2d(-2, -1)));
+        Rectangle rectangle = new Rectangle(new Vector2d(-2, -1),
+                new Vector2d(-2, 3), new Vector2d(5, 3), new Vector2d(5, -1),
+                new Line(new Vector2d(-2, -1), new Vector2d(-2, 3)),
+                new Line(new Vector2d(-2, 3), new Vector2d(5, 3)),
+                new Line(new Vector2d(5, 3), new Vector2d(5, -1)),
+                new Line(new Vector2d(5, -1), new Vector2d(-2, -1)));
 
         assert p.isIntersRect(rectangle);
     }
@@ -86,9 +89,12 @@ public class UnitTest {
 
 
         Vector2d p = new Vector2d(0, 0);
-        Rectangle rect = new Rectangle(new Vector2d(-0.39, -2.19), new Vector2d(3.89, 0.27), new Vector2d(2.20, 3.22), new Vector2d(-2.08, 0.76),
-                new Line(new Vector2d(-0.39, -2.19), new Vector2d(3.89, 0.27)), new Line(new Vector2d(3.89, 0.27), new Vector2d(2.20, 3.22)),
-                new Line(new Vector2d(2.20, 3.22), new Vector2d(-2.08, 0.76)), new Line(new Vector2d(-2.08, 0.76), new Vector2d(-0.39, -2.19)));
+        Rectangle rect = new Rectangle(new Vector2d(-0.39, -2.19), new Vector2d(3.89, 0.27),
+                new Vector2d(2.20, 3.22), new Vector2d(-2.08, 0.76),
+                new Line(new Vector2d(-0.39, -2.19), new Vector2d(3.89, 0.27)),
+                new Line(new Vector2d(3.89, 0.27), new Vector2d(2.20, 3.22)),
+                new Line(new Vector2d(2.20, 3.22), new Vector2d(-2.08, 0.76)),
+                new Line(new Vector2d(-2.08, 0.76), new Vector2d(-0.39, -2.19)));
 
 
         assert p.isIntersRect(rect);
@@ -98,16 +104,23 @@ public class UnitTest {
     public void test7() {
 
 
-        Rectangle rectangle1 = new Rectangle(new Vector2d(3.69, 1.46), new Vector2d(2.65, -3.18), new Vector2d(-0.78, -2.41), new Vector2d(0.26, 2.23),
-                new Line(new Vector2d(3.69, 1.46), new Vector2d(2.65, -3.18)), new Line(new Vector2d(2.65, -3.18), new Vector2d(-0.78, -2.41)),
-                new Line(new Vector2d(-0.78, -2.41), new Vector2d(0.26, 2.23)), new Line(new Vector2d(0.26, 2.23), new Vector2d(3.69, 1.46)));
+        Rectangle rectangle1 = new Rectangle(new Vector2d(3.69, 1.46),
+                new Vector2d(2.65, -3.18), new Vector2d(-0.78, -2.41), new Vector2d(0.26, 2.23),
+                new Line(new Vector2d(3.69, 1.46), new Vector2d(2.65, -3.18)),
+                new Line(new Vector2d(2.65, -3.18), new Vector2d(-0.78, -2.41)),
+                new Line(new Vector2d(-0.78, -2.41), new Vector2d(0.26, 2.23)),
+                new Line(new Vector2d(0.26, 2.23), new Vector2d(3.69, 1.46)));
 
-        Rectangle rectangle2 = new Rectangle(new Vector2d(3.04, -5.37), new Vector2d(0.17, -2.22), new Vector2d(2.38, -0.20), new Vector2d(5.25, -3.35),
-                new Line(new Vector2d(3.04, -5.37), new Vector2d(0.17, -2.22)), new Line(new Vector2d(0.17, -2.22), new Vector2d(2.38, -0.20)),
-                new Line(new Vector2d(2.38, -0.20), new Vector2d(5.25, -3.35)), new Line(new Vector2d(5.25, -3.35), new Vector2d(3.04, -5.37)));
+        Rectangle rectangle2 = new Rectangle(new Vector2d(3.04, -5.37), new Vector2d(0.17, -2.22),
+                new Vector2d(2.38, -0.20), new Vector2d(5.25, -3.35),
+                new Line(new Vector2d(3.04, -5.37), new Vector2d(0.17, -2.22)),
+                new Line(new Vector2d(0.17, -2.22), new Vector2d(2.38, -0.20)),
+                new Line(new Vector2d(2.38, -0.20), new Vector2d(5.25, -3.35)),
+                new Line(new Vector2d(5.25, -3.35), new Vector2d(3.04, -5.37)));
 
 
-        Task task = new Task(new CoordinateSystem2d(10, 10, 20, 20), new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        Task task = new Task(new CoordinateSystem2d(10, 10, 20, 20),
+                new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 
         assert Math.abs(task.getAreaIntersRect(rectangle1, rectangle2, 2)- 4.98297) < 0.001;
     }
@@ -116,17 +129,26 @@ public class UnitTest {
     public void test8() {
 
 
-        Rectangle rectangle1 = new Rectangle(new Vector2d(3.69, 1.46), new Vector2d(2.65, -3.18), new Vector2d(-0.78, -2.41), new Vector2d(0.26, 2.23),
-                new Line(new Vector2d(3.69, 1.46), new Vector2d(2.65, -3.18)), new Line(new Vector2d(2.65, -3.18), new Vector2d(-0.78, -2.41)),
-                new Line(new Vector2d(-0.78, -2.41), new Vector2d(0.26, 2.23)), new Line(new Vector2d(0.26, 2.23), new Vector2d(3.69, 1.46)));
+        Rectangle rectangle1 = new Rectangle(new Vector2d(3.69, 1.46), new Vector2d(2.65, -3.18),
+                new Vector2d(-0.78, -2.41), new Vector2d(0.26, 2.23),
+                new Line(new Vector2d(3.69, 1.46), new Vector2d(2.65, -3.18)),
+                new Line(new Vector2d(2.65, -3.18), new Vector2d(-0.78, -2.41)),
+                new Line(new Vector2d(-0.78, -2.41), new Vector2d(0.26, 2.23)),
+                new Line(new Vector2d(0.26, 2.23), new Vector2d(3.69, 1.46)));
 
-        Rectangle rectangle2 = new Rectangle(new Vector2d(3.04, -5.37), new Vector2d(0.17, -2.22), new Vector2d(2.38, -0.20), new Vector2d(5.25, -3.35),
-                new Line(new Vector2d(3.04, -5.37), new Vector2d(0.17, -2.22)), new Line(new Vector2d(0.17, -2.22), new Vector2d(2.38, -0.20)),
-                new Line(new Vector2d(2.38, -0.20), new Vector2d(5.25, -3.35)), new Line(new Vector2d(5.25, -3.35), new Vector2d(3.04, -5.37)));
+        Rectangle rectangle2 = new Rectangle(new Vector2d(3.04, -5.37), new Vector2d(0.17, -2.22),
+                new Vector2d(2.38, -0.20), new Vector2d(5.25, -3.35),
+                new Line(new Vector2d(3.04, -5.37), new Vector2d(0.17, -2.22)),
+                new Line(new Vector2d(0.17, -2.22), new Vector2d(2.38, -0.20)),
+                new Line(new Vector2d(2.38, -0.20), new Vector2d(5.25, -3.35)),
+                new Line(new Vector2d(5.25, -3.35), new Vector2d(3.04, -5.37)));
 
-        Rectangle rectangle3 = new Rectangle(new Vector2d(-1.56, -0.60), new Vector2d(-1.16, 4.13), new Vector2d(5.84, 3.54), new Vector2d(5.44, -1.19),
-                new Line(new Vector2d(-1.56, -0.60), new Vector2d(-1.16, 4.13)), new Line(new Vector2d(-1.16, 4.13), new Vector2d(5.84, 3.54)),
-                new Line(new Vector2d(5.84, 3.54), new Vector2d(5.44, -1.19)), new Line(new Vector2d(5.44, -1.19), new Vector2d(-1.56, -0.60)));
+        Rectangle rectangle3 = new Rectangle(new Vector2d(-1.56, -0.60), new Vector2d(-1.16, 4.13),
+                new Vector2d(5.84, 3.54), new Vector2d(5.44, -1.19),
+                new Line(new Vector2d(-1.56, -0.60), new Vector2d(-1.16, 4.13)),
+                new Line(new Vector2d(-1.16, 4.13), new Vector2d(5.84, 3.54)),
+                new Line(new Vector2d(5.84, 3.54), new Vector2d(5.44, -1.19)),
+                new Line(new Vector2d(5.44, -1.19), new Vector2d(-1.56, -0.60)));
 
         ArrayList<Point> points = new ArrayList<>();
 
@@ -166,7 +188,8 @@ public class UnitTest {
         rectangles.add(rectangle2);
         rectangles.add(rectangle3);
 
-        Task task = new Task(new CoordinateSystem2d(10, 10, 20, 20), points, lines, rectangles, new ArrayList<>());
+        Task task = new Task(new CoordinateSystem2d(10, 10, 20, 20), points,
+                lines, rectangles, new ArrayList<>());
 
         assert Math.abs(task.getAreaIntersRect(rectangle1, rectangle2, 2) - 4.98297) < 0.001;
 

@@ -46,7 +46,8 @@ public class Line {
      * @param pointB вторая опорная точка
      */
     @JsonCreator
-    public Line(@JsonProperty("pointA") Vector2d pointA, @JsonProperty("pointB") Vector2d pointB) {
+    public Line(@JsonProperty("pointA") Vector2d pointA,
+                @JsonProperty("pointB") Vector2d pointB) {
         this.pointA = pointA;
         this.pointB = pointB;
         this.isAns = false;
@@ -63,7 +64,9 @@ public class Line {
      * @return расстояние
      */
     public double getDistance(Vector2d pos) {
-        return Math.abs(a * pos.x + b * pos.y + c) / Math.sqrt(a * a + b * b);
+        return
+                Math.abs(a * pos.x + b * pos.y + c)
+                        / Math.sqrt(a * a + b * b);
     }
     /**
      * Строковое представление объекта
@@ -97,7 +100,8 @@ public class Line {
      */
     @JsonIgnore
     public int getColor() {
-        return (isAns ? Misc.getColor(0xCC, 0x00, 0xFF, 0x00) : Misc.getColor(0xCC, 0xFF, 0xFF, 0xFF));
+        return (isAns ? Misc.getColor(0xCC, 0x00, 0xFF, 0x00)
+                : Misc.getColor(0xCC, 0xFF, 0xFF, 0xFF));
     }
     /**
      * пересекаются ли прямые
@@ -116,12 +120,14 @@ public class Line {
      */
     public Vector2d getIntersLines(Line other) {
         if (b != 0 && other.b != 0) {
-            double x = (other.c * b - c * other.b) / (a * other.b - other.a * b);
+            double x = (other.c * b - c * other.b) /
+                    (a * other.b - other.a * b);
             return new Vector2d(x, -a * x / b - c / b);
         }
         else if (b == 0 && other.b != 0) {
             double x = -c / a;
-            return new Vector2d(x, -other.a * x / other.b - other.c / other.b);
+            return new Vector2d(x, -other.a * x /
+                    other.b - other.c / other.b);
         }
         double x = -other.c / other.a;
         return new Vector2d(x, -a * x / b - c / b);

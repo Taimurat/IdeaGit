@@ -57,8 +57,10 @@ public class Rectangle {
      * @param DA четвёртый отрезок
      */
     @JsonCreator
-    public Rectangle(@JsonProperty("pointA") Vector2d pointA, @JsonProperty("pointB") Vector2d pointB, @JsonProperty("pointC") Vector2d pointC, @JsonProperty("pointD") Vector2d pointD,
-                     @JsonProperty("AB") Line AB, @JsonProperty("BC") Line BC, @JsonProperty("CD") Line CD, @JsonProperty("DA") Line DA) {
+    public Rectangle(@JsonProperty("pointA") Vector2d pointA, @JsonProperty("pointB") Vector2d pointB,
+                     @JsonProperty("pointC") Vector2d pointC, @JsonProperty("pointD") Vector2d pointD,
+                     @JsonProperty("AB") Line AB, @JsonProperty("BC") Line BC,
+                     @JsonProperty("CD") Line CD, @JsonProperty("DA") Line DA) {
         this.pointA = pointA;
         this.pointB = pointB;
         this.pointC = pointC;
@@ -118,7 +120,11 @@ public class Rectangle {
      * получить нулевой прямоугольник
      */
     public static Rectangle nullRectangle() {
-        return new Rectangle(new Vector2d(0, 0), new Vector2d(0, 0), new Vector2d(0, 0), new Vector2d(0, 0),
-                new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)), new Line(new Vector2d(0, 0), new Vector2d(0, 0)));
+        return new Rectangle(new Vector2d(0, 0), new Vector2d(0, 0),
+                new Vector2d(0, 0), new Vector2d(0, 0),
+                new Line(new Vector2d(0, 0), new Vector2d(0, 0)),
+                new Line(new Vector2d(0, 0), new Vector2d(0, 0)),
+                new Line(new Vector2d(0, 0), new Vector2d(0, 0)),
+                new Line(new Vector2d(0, 0), new Vector2d(0, 0)));
     }
 }

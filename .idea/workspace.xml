@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="Control, Data Structures, Render, Buttons, Mouse, Solve, Files">
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+    <list default="true" id="e842a502-5180-4992-9ebf-89e55803ed54" name="Changes" comment="ReadMe">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Line.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Line.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Rectangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Rectangle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/app/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/UnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/UnitTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,7 +157,8 @@
       <workItem from="1683277463428" duration="3194000" />
       <workItem from="1683296638878" duration="6615000" />
       <workItem from="1683304296844" duration="8822000" />
-      <workItem from="1683354508460" duration="713000" />
+      <workItem from="1683354508460" duration="2029000" />
+      <workItem from="1683738093571" duration="6212000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1677913399113</created>
@@ -455,7 +461,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683355036811</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="ReadMe">
+      <created>1683355315578</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1683355315578</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -473,7 +486,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="task rendering works" />
     <MESSAGE value="adding points works" />
     <MESSAGE value="multiline label" />
     <MESSAGE value="inputs work" />
@@ -498,7 +510,8 @@
     <MESSAGE value="add hatching (to work normally); fix isInterLines, getInterLines in Line" />
     <MESSAGE value="fixed FINALLY cancel button, fixed add random button (to work normally), fixed add from adding manually" />
     <MESSAGE value="Control, Data Structures, Render, Buttons, Mouse, Solve, Files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Control, Data Structures, Render, Buttons, Mouse, Solve, Files" />
+    <MESSAGE value="ReadMe" />
+    <option name="LAST_COMMIT_MESSAGE" value="ReadMe" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/My_Project$UnitTest.ic" NAME="UnitTest Coverage Results" MODIFIED="1683298916799" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

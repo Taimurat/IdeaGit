@@ -433,8 +433,10 @@ public class Task {
             while (mass.size() != 0) {
                 Vector2d Point = mass.get(0);
                 for (Vector2d point : mass) {
-                    double a1 = Math.atan((point.x - first.x) / (first.y - point.y));
-                    double a2 = Math.atan((Point.x - first.x) / (first.y - Point.y));
+                    double a1 = Math.atan((point.x - first.x) /
+                            (first.y - point.y));
+                    double a2 = Math.atan((Point.x - first.x) /
+                            (first.y - Point.y));
                     if (a1 < 0) {
                         a1 += Math.PI;
                     }
@@ -459,10 +461,12 @@ public class Task {
         ArrayList<Vector2d> ans = new ArrayList<>();
         for (Line lineF : first.getListLines()) {
             for (Line lineS : second.getListLines()) {
-                if (lineF.isIntersLines(lineS) && lineF.getIntersLines(lineS).isBelongSegment(lineF, lineS)) {
+                if (lineF.isIntersLines(lineS) &&
+                        lineF.getIntersLines(lineS).isBelongSegment(lineF, lineS)) {
                     ans.add(lineF.getIntersLines(lineS));
                     if (mode == 1) {
-                        PanelLog.info("Точка пересечения " + lineF.getIntersLines(lineS) + " обработана\n");
+                        PanelLog.info("Точка пересечения "
+                                + lineF.getIntersLines(lineS) + " обработана\n");
                         addPoint(lineF.getIntersLines(lineS));
                     }
                 }
@@ -583,7 +587,8 @@ public class Task {
             }
             //штриховка
             ArrayList<Double> ext = getExtremum(ans);
-            double minX = ext.get(0), minY = ext.get(1), maxX = ext.get(2), maxY = ext.get(3);
+            double minX = ext.get(0), minY = ext.get(1),
+                    maxX = ext.get(2), maxY = ext.get(3);
             for (double i = minY + minX; i <= maxY + maxX; i += 0.3) {
                 double a = 1, b = 1, c = -i;
                 Vector2d firstPoint=null; Vector2d secondPoint=null;
@@ -603,7 +608,8 @@ public class Task {
                 }
 
             }
-            PanelLog.info("Ответ показан на экране. Площадь такого пересечения " + getAreaIntersRect(ansRectF, ansRectS, 2));
+            PanelLog.info("Ответ показан на экране. Площадь такого пересечения "
+                    + getAreaIntersRect(ansRectF, ansRectS, 2));
 
         } else {
             PanelLog.info("Пересечений прямоугольников нет\n");

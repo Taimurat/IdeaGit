@@ -71,7 +71,8 @@ public class Point {
      */
     @JsonIgnore
     public int getColor() {
-        return isAns ? Misc.getColor(0xCC, 0xF8, 0x3B, 0xBB) : Misc.getColor(0xCC, 0x00, 0xFF, 0x0);
+        return isAns ? Misc.getColor(0xCC, 0xF8, 0x3B, 0xBB)
+                : Misc.getColor(0xCC, 0x00, 0xFF, 0x0);
     }
     /**
      * пометить точку
